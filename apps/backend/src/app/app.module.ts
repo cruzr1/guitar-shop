@@ -1,11 +1,15 @@
 import { Module } from '@nestjs/common';
-
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { ConfigBackendModule, getMongoOptions } from '@guitar-shop/config/backend';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    ConfigBackendModule,
+    MongooseModule.forRootAsync(
+      getMongoOptions()
+    )
+  ],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
