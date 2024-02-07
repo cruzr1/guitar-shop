@@ -2,9 +2,13 @@ import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import { UserController } from "./user.controller";
+import { JwtAccessStrategy, JwtRefreshStrategy, LocalStrategy} from "../strategies";
 import { RefreshTokenModule } from "../refresh-token/refresh-token.module";
 import { UserSchema, UserModel} from './user.model';
 import { getJwtOptions } from "@guitar-shop/config/backend";
+import { UserService } from './user.service';
+import { UserRepository } from './user.repository';
 
 
 @Module({
@@ -21,8 +25,10 @@ import { getJwtOptions } from "@guitar-shop/config/backend";
   providers: [
     JwtAccessStrategy,
     LocalStrategy,
-    JwtRefreshStrategy
+    JwtRefreshStrategy,
+    UserService,
+    UserRepository
   ],
-  controllers: [],
+  controllers: [UserController],
 })
 export class UserModule {}

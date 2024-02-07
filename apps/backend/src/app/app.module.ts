@@ -3,6 +3,7 @@ import { ConfigBackendModule, getMongoOptions, getJwtOptions } from '@guitar-sho
 import { MongooseModule } from '@nestjs/mongoose';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -13,7 +14,8 @@ import { ConfigService } from '@nestjs/config';
     JwtModule.registerAsync({
       inject: [ConfigService],
       useFactory: getJwtOptions,
-    })
+    }),
+    UserModule
   ],
   controllers: [],
   providers: [],

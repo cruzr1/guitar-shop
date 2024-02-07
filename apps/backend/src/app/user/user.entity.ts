@@ -13,7 +13,7 @@ export class UserEntity implements User {
     this.populate(user);
   }
 
-  public toPOJO () {
+  public toPOJO ():User {
     return {
       id: this.id,
       email: this.email,
