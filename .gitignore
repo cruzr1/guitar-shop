@@ -4,9 +4,6 @@
 dist
 tmp
 /out-tsc
-/build/
-/lib/
-/docs/
 
 # dependencies
 node_modules

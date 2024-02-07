@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@guitar-shop/config/backend": ["libs/config/backend/src/index.ts"],
+      "@guitar-shop/helpers": ["libs/shared/helpers/src/index.ts"],
+      "@guitar-shop/types": ["libs/shared/types/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
