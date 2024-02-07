@@ -15,7 +15,9 @@ export default function Layout ():JSX.Element {
           </div>
         </div>
       </header>
-      <Outlet />
+      <main className="page-content">
+        <Outlet />
+      </main>
       <footer className="footer">
         <div className="container">
           <div className="footer__container">

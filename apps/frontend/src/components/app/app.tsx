@@ -30,7 +30,7 @@ export default function App (): JSX.Element {
               element={<EditItemPage />}
             />
             <Route
-              path={AppRoute.Error}
+              path={AppRoute.Login}
               element={<LoginPage />}
             />
             <Route

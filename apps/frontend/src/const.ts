@@ -3,7 +3,7 @@ export const AppRoute = {
   Register: '/register',
   AddItem: '/addItem',
   EditItem: '/editItem',
-  Error: '/error',
+  Error: '*',
   Products: '/products',
   ProductId: '/products/:productId',
 } as const;
