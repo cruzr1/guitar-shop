@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule} from '@nestjs/config';
 import applicationConfig from './lib/application/application.config';
 import mongoConfig from './lib/mongodb/mongodb.config';
+import jwtConfig from './lib/jwt/jwt.config';
 
 const ENV_BACKEND_FILE_PATH = 'apps/backend/.backend.env'
 
@@ -10,7 +11,7 @@ const ENV_BACKEND_FILE_PATH = 'apps/backend/.backend.env'
     ConfigModule.forRoot({
       isGlobal: true,
       cache: true,
-      load: [applicationConfig, mongoConfig],
+      load: [applicationConfig, mongoConfig, jwtConfig],
       envFilePath: ENV_BACKEND_FILE_PATH
     }),
   ]
