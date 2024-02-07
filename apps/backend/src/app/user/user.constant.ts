@@ -8,8 +8,8 @@ export const USERMAIL_FIELD = 'email';
 export const UserValidationParams = {
   Name: {
     Length: {
-      Minimal: 3,
-      Maximal: 50
+      Minimal: 1,
+      Maximal: 15
     }
   },
   Password: {
