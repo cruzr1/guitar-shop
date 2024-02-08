@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 import CatalogList from '../../components/catalog-list/catalog-list';
 import CatalogFilter from '../../components/catalog-filter/catalog-filter';
@@ -11,6 +12,9 @@ export default function ProductListPage (): JSX.Element {
   const navigate = useNavigate();
   return (
     <section className="product-list">
+      <Helmet>
+        <title>Просмотр товаров — Guitar-shop</title>
+      </Helmet>
       <div className="container">
         <h1 className="product-list__title">Список товаров</h1>
         <Breadcrumbs />

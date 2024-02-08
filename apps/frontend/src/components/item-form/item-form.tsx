@@ -1,4 +1,5 @@
-import { GuitarType, STRINGS } from '../../const';
+import { useNavigate } from 'react-router-dom';
+import { AppRoute, GuitarType, STRINGS } from '../../const';
 import Breadcrumbs from '../breadcrumbs/breadcrumbs'
 
 type ItemFormProps = {
@@ -14,7 +15,7 @@ export default function ItemForm ({isAddForm}: ItemFormProps):JSX.Element {
   const price = 27000;
   const guitarTypes = Object.values(GuitarType)
   const RequiredFieldComment = ():JSX.Element => <p>Заполните поле</p>;
-
+  const navigate = useNavigate();
   return (
     <section className={`${classPrefix}-item`}>
       <div className="container">
@@ -83,7 +84,11 @@ export default function ItemForm ({isAddForm}: ItemFormProps):JSX.Element {
           </div>
           <div className={`${classPrefix}-item__form-buttons-wrap`}>
             <button className={`button button--small ${classPrefix}-item__form-button`} type="submit">Сохранить изменения</button>
-            <button className={`button button--small ${classPrefix}-item__form-button`} type="button">Вернуться к списку товаров</button>
+            <button
+              className={`button button--small ${classPrefix}-item__form-button`}
+              type="button"
+              onClick={() => navigate(AppRoute.Products)}
+            >Вернуться к списку товаров</button>
           </div>
         </form>
       </div>
