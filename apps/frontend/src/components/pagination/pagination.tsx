@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { Link } from 'react-router-dom';
 import { PaginationParams } from '../../const';
 
 export default function Pagination ():JSX.Element {
@@ -16,10 +17,10 @@ export default function Pagination ():JSX.Element {
     <div className="pagination product-list__pagination">
       <ul className="pagination__list">
         {pageNumbers.map((val) => (
-          <li key={val} className={classNames('pagination__page', {'pagination__page--active': val === currentPage})}><a className="link pagination__page-link" href={`${val}`}>{val}</a>
+          <li key={val} className={classNames('pagination__page', {'pagination__page--active': val === currentPage})}><Link className="link pagination__page-link" to='#'>{val}</Link>
           </li>
         ))}
-        {isNextDisplay && <li className="pagination__page pagination__page--next" id="next"><a className="link pagination__page-link" href={`${nextPage}`}>Далее</a>
+        {isNextDisplay && <li className="pagination__page pagination__page--next" id="next"><Link className="link pagination__page-link" to='#' >Далее</Link>
         </li>}
       </ul>
     </div>

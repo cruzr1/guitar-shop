@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+import { AppRoute } from '../../const'
 
 type LoginFormProps = {
   isSignin?: boolean
@@ -8,7 +10,7 @@ export default function LoginForm ({isSignin}: LoginFormProps): JSX.Element {
     <div className="container">
       <section className="login">
         <h1 className="login__title">{isSignin ? 'Регистрация' : 'Войти'}</h1>
-        {!isSignin && <p className="login__text">Hовый пользователь? <a className="login__link" href="registration.html">Зарегистрируйтесь</a> прямо сейчас</p>}
+        {!isSignin && <p className="login__text">Hовый пользователь? <Link className="login__link" to={AppRoute.Signin}>Зарегистрируйтесь</Link> прямо сейчас</p>}
         <form method="post" action="/">
           <div className="input-login">
             {isSignin &&

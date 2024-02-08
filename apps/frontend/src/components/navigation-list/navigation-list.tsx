@@ -1,3 +1,6 @@
+import { Link, useLocation } from 'react-router-dom';
+import { AppRoute } from '../../const';
+
 type NavigationListProps = {
   isAuthorised: boolean
 };
@@ -9,16 +12,16 @@ export default function NavigationList ({isAuthorised}: NavigationListProps): JS
         <ul className="main-nav__list">
           {!isAuthorised ?
             <>
-              <li className="main-nav__item"><a className="link main-nav__link" href="#">Каталог</a>
+              <li className="main-nav__item"><Link className="link main-nav__link" to='#'>Каталог</Link>
               </li>
-              <li className="main-nav__item"><a className="link main-nav__link" href="#">Где купить?</a>
+              <li className="main-nav__item"><Link className="link main-nav__link" to='#'>Где купить?</Link>
               </li>
-              <li className="main-nav__item"><a className="link main-nav__link" href="#">О компании</a>
+              <li className="main-nav__item"><Link className="link main-nav__link" to='#'>О компании</Link>
               </li> </>:
               <>
-              <li className="main-nav__item"><a className="link main-nav__link" href="main">Каталог</a>
+              <li className="main-nav__item"><Link className="link main-nav__link" to={AppRoute.Login}>Каталог</Link>
               </li>
-              <li className="main-nav__item"><a className="link main-nav__link" href="#">Список товаров</a>
+              <li className="main-nav__item"><Link className="link main-nav__link" to={AppRoute.Products}>Список товаров</Link>
               </li>
             </>
           }
@@ -26,12 +29,12 @@ export default function NavigationList ({isAuthorised}: NavigationListProps): JS
       </nav>
       <div className="header__container">
         <span className="header__user-name">Имя</span>
-        <a className="header__link" href="login.html" aria-label="Перейти в личный кабинет">
+        <Link className="header__link" to={AppRoute.Login} aria-label="Перейти в личный кабинет">
           <svg className="header__link-icon" width="12" height="14" aria-hidden="true">
             <use xlinkHref="#icon-account"></use>
           </svg>
           <span className="header__link-text">Вход</span>
-        </a>
+        </Link>
       </div>
     </>
   )
