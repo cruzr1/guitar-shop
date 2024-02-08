@@ -6,7 +6,9 @@ export default function CatalogList (): JSX.Element {
     <div className="catalog-cards">
       <ul className="catalog-cards__list">
         {GUITARS.map((guitar) => (
-          <CatalogItem {...guitar}/>
+          <li className="catalog-item" key={guitar.id}>
+            <CatalogItem {...guitar} />
+          </li>
         ))}
       </ul>
     </div>

@@ -7,7 +7,7 @@ export default function CatalogFilter ():JSX.Element {
       <fieldset className="catalog-filter__block">
         <legend className="catalog-filter__block-title">Тип гитар</legend>
         {Object.values(GuitarType).map(({name, filterId}) => (
-          <div className="form-checkbox catalog-filter__block-item">
+          <div className="form-checkbox catalog-filter__block-item" key={filterId}>
             <input className="visually-hidden" type="checkbox" id={filterId} name={filterId} checked={filterId !== 'acoustic'} />
             <label htmlFor={filterId}>{name}</label>
           </div>
@@ -16,7 +16,7 @@ export default function CatalogFilter ():JSX.Element {
       <fieldset className="catalog-filter__block">
         <legend className="catalog-filter__block-title">Количество струн</legend>
         {STRINGS.map((num) => (
-          <div className="form-checkbox catalog-filter__block-item">
+          <div className="form-checkbox catalog-filter__block-item" key={num}>
             <input className="visually-hidden" type="checkbox" id={`${num}-strings`} name={`${num}-strings`} checked={[4, 6].includes(num)} />
             <label htmlFor={`${num}-strings`}>{num}</label>
         </div>

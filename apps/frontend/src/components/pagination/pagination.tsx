@@ -16,7 +16,7 @@ export default function Pagination ():JSX.Element {
     <div className="pagination product-list__pagination">
       <ul className="pagination__list">
         {pageNumbers.map((val) => (
-          <li className={classNames('pagination__page', {'pagination__page--active': val === currentPage})}><a className="link pagination__page-link" href={`${val}`}>{val}</a>
+          <li key={val} className={classNames('pagination__page', {'pagination__page--active': val === currentPage})}><a className="link pagination__page-link" href={`${val}`}>{val}</a>
           </li>
         ))}
         {isNextDisplay && <li className="pagination__page pagination__page--next" id="next"><a className="link pagination__page-link" href={`${nextPage}`}>Далее</a>

@@ -35,7 +35,7 @@ export default function ItemForm ({isAddForm}: ItemFormProps):JSX.Element {
             <div className={`input-radio ${classPrefix}-item__form-radio`}><span>{isAddForm ? 'Выберите тип товара' : 'Тип товара'}</span>
               {guitarTypes.map(({name, id}) => (
                 <>
-                  <input type="radio" id={id} name="item-type" value={id} checked={id==='el-guitar'} />
+                  <input type="radio" id={id} name="item-type" value={id} checked={id==='el-guitar'} key={id} />
                   <label htmlFor={id}>{name}</label>
                 </>
               ))}
@@ -43,7 +43,7 @@ export default function ItemForm ({isAddForm}: ItemFormProps):JSX.Element {
             <div className={`input-radio ${classPrefix}-item__form-radio`}><span>Количество струн</span>
               {STRINGS.map((num) => (
                 <>
-                  <input type="radio" id={`string-qty-${num}`} name="string-qty" value={num} checked={num === 4} />
+                  <input type="radio" id={`string-qty-${num}`} name="string-qty" value={num} checked={num === 4} key={num} />
                   <label htmlFor={`string-qty-${num}`}>{num}</label>
                 </>
               ))}
