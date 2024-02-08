@@ -18,7 +18,7 @@ export default function CatalogItem ({model, description, createdAt, imageURL, t
     <li className="catalog-item">
       <div className="catalog-item__data"><img src={imageURL} width="36" height="93" alt="Картинка гитары"/>
         <div className="catalog-item__data-wrapper">
-          <a className="link" href="./product.html"><p className="catalog-item__data-title">{`${GuitarType[type]} ${model}`}</p></a>
+          <a className="link" href="./product.html"><p className="catalog-item__data-title">{`${GuitarType[type].name} ${model}`}</p></a>
           <br/>
           <p className="catalog-item__data-date">{`Дата добавления ${createdAt.toLocaleDateString()}`}</p>
           <p className="catalog-item__data-price">{`${price} ₽`}</p>

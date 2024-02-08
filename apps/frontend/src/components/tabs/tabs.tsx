@@ -13,7 +13,7 @@ export default function Tabs (): JSX.Element {
           </tr>
           <tr className="tabs__table-row">
             <td className="tabs__title">Тип:</td>
-            <td className="tabs__value">{GuitarType[product.type]}</td>
+            <td className="tabs__value">{GuitarType[product.type].name}</td>
           </tr>
           <tr className="tabs__table-row">
             <td className="tabs__title">Количество струн:</td>

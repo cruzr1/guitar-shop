@@ -24,9 +24,21 @@ export const Networks = {
 } as const;
 
 export const GuitarType = {
-  Electric: 'Электрогитара',
-  Ukulele: 'Укулеле',
-  Acoustic: 'Акустическа гитара',
+  Acoustic: {
+    name: 'Акустическая гитара',
+    id: 'guitar',
+    filterId: 'acoustic'
+  },
+  Electric: {
+    name: 'Электрогитара',
+    id: 'el-guitar',
+    filterId: 'electric'
+  },
+  Ukulele: {
+    name: 'Укулеле',
+    id: 'ukulele',
+    filterId: 'ukulele'
+  },
 } as const;
 
 
@@ -36,3 +48,6 @@ export const PaginationParams = {
   LastPageMinimum: 3,
   FirstPageMinimum: 1,
 }
+
+export const STRINGS = [4, 6, 7, 12] as const;
+
