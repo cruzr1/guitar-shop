@@ -1,6 +1,6 @@
 export const AppRoute = {
   Login: '/login',
-  Register: '/register',
+  Signin: '/signin',
   AddItem: '/addItem',
   EditItem: '/editItem',
   Error: '*',
@@ -23,8 +23,16 @@ export const Networks = {
   }
 } as const;
 
-export const ItemFormParams = {
-  Add : {
-    classPrefix: 'add'
-  }
+export const GuitarType = {
+  Electric: 'Электрогитара',
+  Ukulele: 'Укулеле',
+  Acoustic: 'Акустическа гитара',
+} as const;
+
+
+export const PaginationParams = {
+  PageCount: 2,
+  PageNextNumber: 1,
+  LastPageMinimum: 3,
+  FirstPageMinimum: 1,
 }

@@ -1,7 +1,7 @@
-import ItemForm from '../../components/description/item-form'
+import ItemForm from '../../components/item-form/item-form'
 
 export default function EditItemPage ():JSX.Element {
   return (
-    <ItemForm isAddForm={false}/>
+    <ItemForm />
   )
 }

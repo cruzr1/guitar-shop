@@ -1,7 +1,7 @@
 import Breadcrumbs from '../breadcrumbs/breadcrumbs'
 
 type ItemFormProps = {
-  isAddForm: boolean,
+  isAddForm?: boolean,
 }
 
 export default function ItemForm ({isAddForm}: ItemFormProps):JSX.Element {

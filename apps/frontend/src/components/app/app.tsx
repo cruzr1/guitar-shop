@@ -34,7 +34,7 @@ export default function App (): JSX.Element {
               element={<LoginPage />}
             />
             <Route
-              path={AppRoute.Register}
+              path={AppRoute.Signin}
               element={<RegistrationPage />}
             />
             <Route
