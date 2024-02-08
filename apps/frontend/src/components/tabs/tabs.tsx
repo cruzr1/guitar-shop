@@ -1,13 +1,26 @@
 import { GUITARS } from '../../mocks/guitars.mocks'
 import { GuitarType } from '../../const';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import classNames from 'classnames';
 
 export default function Tabs (): JSX.Element {
   const product = GUITARS[0];
+  const [isSummary, setSummary] = useState<boolean>(true);
   return (
-    <div className="tabs"><Link className="button button--medium tabs__button" to="#">Характеристики</Link><Link className="button button--black-border button--medium tabs__button" to="#">Описание</Link>
+    <div className="tabs">
+      <Link
+        className={classNames('button', 'button--medium', 'tabs__button', {'button--black-border': !isSummary})}
+        to="#"
+        onClick={() => setSummary(true)}
+      >Характеристики</Link>
+      <Link
+        className={classNames('button', 'button--medium', 'tabs__button', {'button--black-border': isSummary})}
+        to="#"
+        onClick={() => setSummary(false)}
+      >Описание</Link>
       <div className="tabs__content" id="characteristics">
-        <table className="tabs__table">
+        <table className={classNames('tabs__table', {'hidden': !isSummary})}>
           <tr className="tabs__table-row">
             <td className="tabs__title">Артикул:</td>
             <td className="tabs__value">{product.article}</td>
@@ -21,7 +34,7 @@ export default function Tabs (): JSX.Element {
             <td className="tabs__value">{product.stringsCount} струнная</td>
           </tr>
         </table>
-        <p className="tabs__product-description hidden">{product.description}</p>
+        <p className={classNames('tabs__product-description', {'hidden': isSummary})}>{product.description}</p>
       </div>
     </div>
   )

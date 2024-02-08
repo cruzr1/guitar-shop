@@ -13,6 +13,13 @@ export default function ItemForm ({isAddForm}: ItemFormProps):JSX.Element {
   const article ='CLSU3455678';
   const description = ' Plucked stringed instrument. It normally has six strings, a fretted fingerboard, and a soundbox with a pronounced waist. It probably originated in Spain in the early 16th century. By 1800 it was being strung with six single strings; 19th-century innovations gave it its modern form.'
   const price = 27000;
+  const itemData = {
+    model: 'ZX Spectrum',
+    createdAt: '08.02.2024',
+    article:'CLSU3455678',
+    description: ' Plucked stringed instrument. It normally has six strings, a fretted fingerboard, and a soundbox with a pronounced waist. It probably originated in Spain in the early 16th century. By 1800 it was being strung with six single strings; 19th-century innovations gave it its modern form.',
+    price: 27000
+  }
   const guitarTypes = Object.values(GuitarType)
   const RequiredFieldComment = ():JSX.Element => <p>Заполните поле</p>;
   const navigate = useNavigate();
