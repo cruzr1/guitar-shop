@@ -1,5 +1,8 @@
-export default function NavigationList (): JSX.Element {
-  const isAuthorised = true;
+type NavigationListProps = {
+  isAuthorised: boolean
+};
+
+export default function NavigationList ({isAuthorised}: NavigationListProps): JSX.Element {
   return (
     <nav className="main-nav">
       <ul className="main-nav__list">
