@@ -9,6 +9,7 @@ import ProductPage from '../../pages/product-page/product-page';
 import ProductListPage from '../../pages/product-list-page/product-list-page';
 import RegistrationPage from '../../pages/registration-page/registration-page';
 import Layout from '../layout/layout';
+import PrivateRoute from '../private-route/private-route';
 
 
 export default function App (): JSX.Element {
@@ -23,11 +24,35 @@ export default function App (): JSX.Element {
             />
             <Route
               path={AppRoute.AddItem}
-              element={<AddItemPage />}
+              element={
+                <PrivateRoute>
+                  <AddItemPage />
+                </PrivateRoute>
+              }
             />
             <Route
               path={AppRoute.EditItem}
-              element={<EditItemPage />}
+              element={
+                <PrivateRoute>
+                  <EditItemPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path={AppRoute.Products}
+              element={
+                <PrivateRoute>
+                  <ProductListPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path={AppRoute.ProductId}
+              element={
+                <PrivateRoute>
+                  <ProductPage />
+                </PrivateRoute>
+              }
             />
             <Route
               path={AppRoute.Login}
@@ -36,14 +61,6 @@ export default function App (): JSX.Element {
             <Route
               path={AppRoute.Signin}
               element={<RegistrationPage />}
-            />
-            <Route
-              path={AppRoute.Products}
-              element={<ProductListPage />}
-            />
-            <Route
-              path={AppRoute.ProductId}
-              element={<ProductPage />}
             />
             <Route
               path={AppRoute.Error}

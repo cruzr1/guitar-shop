@@ -51,3 +51,8 @@ export const PaginationParams = {
 
 export const STRINGS = [4, 6, 7, 12] as const;
 
+export const AuthStatus = {
+  Auth: 'auth',
+  NoAuth: 'unauth',
+  Unknown: 'unknown'
+};
