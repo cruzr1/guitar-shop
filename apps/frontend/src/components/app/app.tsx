@@ -14,61 +14,59 @@ import PrivateRoute from '../private-route/private-route';
 
 export default function App (): JSX.Element {
   return (
-    <BrowserRouter>
-      <HelmetProvider>
-        <Routes>
-          <Route path='/' element={<Layout />}>
-            <Route
-              index
-              element={<LoginPage />}
-            />
-            <Route
-              path={AppRoute.AddItem}
-              element={
-                <PrivateRoute>
-                  <AddItemPage />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path={AppRoute.EditItem}
-              element={
-                <PrivateRoute>
-                  <EditItemPage />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path={AppRoute.Products}
-              element={
-                <PrivateRoute>
-                  <ProductListPage />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path={AppRoute.ProductId}
-              element={
-                <PrivateRoute>
-                  <ProductPage />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path={AppRoute.Login}
-              element={<LoginPage />}
-            />
-            <Route
-              path={AppRoute.Signin}
-              element={<RegistrationPage />}
-            />
-            <Route
-              path={AppRoute.Error}
-              element={<ErrorPage />}
-            />
-          </Route>
-        </Routes>
-      </HelmetProvider>
-    </BrowserRouter>
+    <HelmetProvider>
+      <Routes>
+        <Route path='/' element={<Layout />}>
+          <Route
+            index
+            element={<LoginPage />}
+          />
+          <Route
+            path={AppRoute.AddItem}
+            element={
+              <PrivateRoute>
+                <AddItemPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={AppRoute.EditItem}
+            element={
+              <PrivateRoute>
+                <EditItemPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={AppRoute.Products}
+            element={
+              <PrivateRoute>
+                <ProductListPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={AppRoute.ProductId}
+            element={
+              <PrivateRoute>
+                <ProductPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={AppRoute.Login}
+            element={<LoginPage />}
+          />
+          <Route
+            path={AppRoute.Signin}
+            element={<RegistrationPage />}
+          />
+          <Route
+            path={AppRoute.Error}
+            element={<ErrorPage />}
+          />
+        </Route>
+      </Routes>
+    </HelmetProvider>
   )
 }

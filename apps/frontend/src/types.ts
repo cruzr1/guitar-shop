@@ -42,7 +42,7 @@ export type LoginType = Pick<UserType, 'email'> & Record<'password', string>;
   export type SigninType = UserType & Record<'password', string>;
 
   export type LoggedUserType = {
-    token: string;
+    accessToken: string;
   }
 
   export type AppRouteType = typeof AppRoute[keyof typeof AppRoute];

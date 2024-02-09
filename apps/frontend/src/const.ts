@@ -111,3 +111,11 @@ export const AUTH_TOKEN_KEY = 'ZGRmZGZkZkBkZmtsamRmLmNvbQ==';
 export const BASE_URL = 'http://localhost:3000/api';
 
 export const REQUEST_TIMEOUT = 5000;
+
+export const PASSWORD_REGEX = /^.{6,12}$/;
+
+export const NAME_REGEX = /^.{1,15}$/;
+
+export const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
+export const NULL_LENGTH = 0;

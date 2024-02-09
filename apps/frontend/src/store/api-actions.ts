@@ -150,8 +150,8 @@ export const loginUserAction = createAsyncThunk<void, LoginType, {
   `${NameSpace.User}/${Action.Login}`,
   async (loginUser, {dispatch, extra: axiosApi}) => {
     try {
-      const {data: {token}} = await axiosApi.post<LoggedUserType>(APIPath.Login, loginUser);
-      setToken(token);
+      const {data: {accessToken}} = await axiosApi.post<LoggedUserType>(APIPath.Login, loginUser);
+      setToken(accessToken);
       dispatch(updateAuthStatus(AuthStatus.Auth));
       dispatch(setEmail(loginUser.email));
       dispatch(redirectToRoute(AppRoute.Products));

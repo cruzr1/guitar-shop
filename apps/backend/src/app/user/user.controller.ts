@@ -63,7 +63,6 @@ export class UserController {
   @UseGuards(JwtAuthGuard)
   @Post('check')
   public async checkToken(@Req() { user: payload }: RequestWithTokenPayload): Promise<TokenPayload> {
-    console.log(payload);
     return payload;
   }
 
