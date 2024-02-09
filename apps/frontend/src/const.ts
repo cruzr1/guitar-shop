@@ -23,7 +23,7 @@ export const Networks = {
   }
 } as const;
 
-export const GuitarType = {
+export const GuitarCategory = {
   Acoustic: {
     name: 'Акустическая гитара',
     id: 'guitar',
@@ -55,4 +55,59 @@ export const AuthStatus = {
   Auth: 'auth',
   NoAuth: 'unauth',
   Unknown: 'unknown'
-};
+} as const;
+
+export const NameSpace = {
+  Guitars: 'guitars',
+  AuthStatus: 'authorisation',
+  User: 'user',
+  Error: 'error',
+  Route: 'route',
+  GuitarForm: 'guitarForm',
+  GuitarList: 'guitarList',
+} as const;
+
+export const Action = {
+  Create: 'create',
+  Get: 'get',
+  Update: 'update',
+  Delete: 'delete',
+  Login: 'login',
+  Logout: 'logout',
+  Redirect: 'redirect',
+} as const;
+
+export const RequestStatus = {
+  Idle: 'idle',
+  Pending: 'pending',
+  Fulfilled: 'fulfilled',
+  Rejected: 'rejected'
+} as const;
+
+export const APIPath = {
+  Guitars: '/guitars',
+  GuitarId: '/guitars/:guitarId',
+  Signin: 'user/signin',
+  Login: 'user/login',
+  Verify: 'user/verify',
+  Logout: 'user/logout',
+} as const;
+
+export const TIMEOUT_SHOW_ERROR = 5000;
+
+export const ErrorMessage = {
+  UserUnauthorised: 'User is unauthorised',
+  FailedLoadGuitars: 'Failed to load guitars',
+  FailedPostGuitarForm: 'Failed to add new guitar',
+  FailedUpdateGuitarForm: 'Failed to update guitar data',
+  FailedDeleteGuitarForm: 'Failed to delete guitar from list',
+  FailedUserLogout: 'Failed to log user out',
+  FailedUserLogin: 'Failed to log user in',
+  FailedUserSignin: 'Failed to sign user in',
+} as const;
+
+export const AUTH_TOKEN_KEY = 'ZGRmZGZkZkBkZmtsamRmLmNvbQ==';
+
+export const BASE_URL = 'http://localhost:3000/api';
+
+export const REQUEST_TIMEOUT = 5000;

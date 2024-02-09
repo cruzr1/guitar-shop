@@ -1,5 +1,5 @@
 import { GUITARS } from '../../mocks/guitars.mocks'
-import { GuitarType } from '../../const';
+import { GuitarCategory } from '../../const';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import classNames from 'classnames';
@@ -27,7 +27,7 @@ export default function Tabs (): JSX.Element {
           </tr>
           <tr className="tabs__table-row">
             <td className="tabs__title">Тип:</td>
-            <td className="tabs__value">{GuitarType[product.type].name}</td>
+            <td className="tabs__value">{GuitarCategory[product.type].name}</td>
           </tr>
           <tr className="tabs__table-row">
             <td className="tabs__title">Количество струн:</td>

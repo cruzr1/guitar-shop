@@ -1,5 +1,5 @@
 import { Link, generatePath } from 'react-router-dom';
-import { AppRoute, GuitarType, STRINGS } from '../../const';
+import { AppRoute, GuitarCategory, STRINGS } from '../../const';
 
 export type CatalogItemProps = {
   id: string;
@@ -9,7 +9,7 @@ export type CatalogItemProps = {
   imageURL: string;
   article: string,
   stringsCount: typeof STRINGS[number]
-  type: keyof typeof GuitarType;
+  type: keyof typeof GuitarCategory;
   price: number;
 }
 
@@ -19,7 +19,7 @@ export default function CatalogItem ({id, model, createdAt, imageURL, type, pric
     <>
       <div className="catalog-item__data"><img src={imageURL} width="36" height="93" alt="Картинка гитары"/>
         <div className="catalog-item__data-wrapper">
-          <Link className="link" to={itemPath}><p className="catalog-item__data-title">{`${GuitarType[type].name} ${model}`}</p></Link>
+          <Link className="link" to={itemPath}><p className="catalog-item__data-title">{`${GuitarCategory[type].name} ${model}`}</p></Link>
           <br/>
           <p className="catalog-item__data-date">{`Дата добавления ${createdAt.toLocaleDateString()}`}</p>
           <p className="catalog-item__data-price">{`${price} ₽`}</p>

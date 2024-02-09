@@ -1,4 +1,4 @@
-import { GuitarType, STRINGS } from '../../const';
+import { GuitarCategory, STRINGS } from '../../const';
 
 export default function CatalogFilter ():JSX.Element {
   return (
@@ -6,7 +6,7 @@ export default function CatalogFilter ():JSX.Element {
       <h2 className="title title--bigger catalog-filter__title">Фильтр</h2>
       <fieldset className="catalog-filter__block">
         <legend className="catalog-filter__block-title">Тип гитар</legend>
-        {Object.values(GuitarType).map(({name, filterId}) => (
+        {Object.values(GuitarCategory).map(({name, filterId}) => (
           <div className="form-checkbox catalog-filter__block-item" key={filterId}>
             <input className="visually-hidden" type="checkbox" id={filterId} name={filterId} checked={filterId !== 'acoustic'} />
             <label htmlFor={filterId}>{name}</label>

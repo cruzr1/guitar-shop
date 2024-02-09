@@ -7,12 +7,10 @@ import { AuthStatusType } from '../../types';
 type PrivateRouteProps = PropsWithChildren;
 
 export default function PrivateRoute ({children}: PrivateRouteProps): JSX.Element {
-  const authStatus: AuthStatusType = 'auth';
+  const authStatus:AuthStatusType = AuthStatus.Auth;
   return (
-    <>
-      {authStatus === AuthStatus.Unknown && <LoadingPage />}
-      {authStatus === AuthStatus.Auth && children}
-      {authStatus === AuthStatus.NoAuth && <Navigate to={AppRoute.Login} />}
-    </>
-  )
+    authStatus === AuthStatus.Auth ?
+      children :
+      <Navigate to={AppRoute.Login} />
+  );
 }
