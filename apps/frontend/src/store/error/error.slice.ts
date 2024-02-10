@@ -13,8 +13,8 @@ export const error = createSlice({
   name: NameSpace.Error,
   initialState: errorState,
   reducers: {
-    setError: ({error}, {payload}: PayloadAction<string | null>) => {
-      error = payload;
+    setError: (state, {payload}: PayloadAction<string | null>) => {
+      state.error = payload;
     }
   }
 });

@@ -1,4 +1,4 @@
-import axios, {AxiosInstance, AxiosError, InternalAxiosRequestConfig} from 'axios';
+import axios, {AxiosInstance, AxiosError, InternalAxiosRequestConfig, HttpStatusCode} from 'axios';
 import { getToken } from './token';
 import { BASE_URL, REQUEST_TIMEOUT, } from '../const';
 
@@ -27,8 +27,8 @@ export const createApi = (): AxiosInstance => {
 
   api.interceptors.response.use(
     (response) => response,
-    (error: AxiosError<DetailMessageType>) => {
-      throw error.message;
+    ({response}: AxiosError<DetailMessageType>) => {
+      throw response?.data.message;
     }
   );
 

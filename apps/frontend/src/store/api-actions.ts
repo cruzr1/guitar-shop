@@ -1,4 +1,4 @@
-import { AxiosInstance } from 'axios';
+import { AxiosError, AxiosInstance } from 'axios';
 import { generatePath } from 'react-router-dom';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { addGuitar, loadGuitars, removeGuitar, updateGuitar } from './guitars/guitars.slice';
@@ -16,7 +16,7 @@ export const clearErrorAction = createAsyncThunk<void, string, {
 >(
   `${NameSpace.Error}/${Action.Delete}`,
   (errorMessage, {dispatch}) => {
-    setError(errorMessage);
+    dispatch(setError(errorMessage));
     setTimeout(
       () => dispatch(setError(null)),
       TIMEOUT_SHOW_ERROR,
@@ -36,8 +36,9 @@ export const loadGuitarsAction = createAsyncThunk<void | undefined, undefined, {
     try {
       const {data} = await axiosApi.get<GuitarType[]>(APIPath.Guitars);
       dispatch(loadGuitars(data))
-    } catch {
-      dispatch(clearErrorAction(ErrorMessage.FailedLoadGuitars));
+    } catch (message) {
+      dispatch(clearErrorAction(`${ErrorMessage.FailedLoadGuitars}: ${message}`));
+
     }
   },
 );
@@ -54,8 +55,8 @@ export const postGuitarFormAction = createAsyncThunk<void, NewGuitarType, {
     try {
       const {data} = await axiosApi.post<GuitarType>(APIPath.Guitars, guitarForm);
       dispatch(addGuitar(data));
-    } catch {
-      dispatch(clearErrorAction(ErrorMessage.FailedPostGuitarForm),);
+    } catch (message) {
+      dispatch(clearErrorAction(`${ErrorMessage.FailedPostGuitarForm}: ${message}`));
     }
   },
 );
@@ -75,8 +76,8 @@ export const updateGuitarFormAction = createAsyncThunk<void, GuitarType, {
         guitarForm
       );
       dispatch(updateGuitar(data));
-    } catch {
-      dispatch(clearErrorAction(ErrorMessage.FailedUpdateGuitarForm),);
+    } catch (message) {
+      dispatch(clearErrorAction(`${ErrorMessage.FailedUpdateGuitarForm}: ${message}`));
     }
   },
 );
@@ -93,8 +94,9 @@ export const removeGuitarFormAction = createAsyncThunk<void, string, {
     try {
       await axiosApi.delete<void>(generatePath(APIPath.GuitarId, {guitarId}));
       dispatch(removeGuitar(guitarId));
-    } catch {
-      dispatch(clearErrorAction(ErrorMessage.FailedDeleteGuitarForm),);
+    } catch (message) {
+      dispatch(clearErrorAction(`${ErrorMessage.FailedDeleteGuitarForm}: ${message}`));
+
     }
   },
 );
@@ -113,9 +115,9 @@ export const signinUserAction = createAsyncThunk<void, SigninType, {
       dispatch(updateAuthStatus(AuthStatus.Auth));
       dispatch(setEmail(newUser.email));
       dispatch(redirectToRoute(AppRoute.Products));
-    } catch {
+    } catch (message) {
       dispatch(updateAuthStatus(AuthStatus.NoAuth));
-      dispatch(clearErrorAction(ErrorMessage.FailedUserSignin));
+      dispatch(clearErrorAction(`${ErrorMessage.FailedUserSignin}: ${message}`));
     }
   },
 );
@@ -133,9 +135,9 @@ export const authoriseUserAction = createAsyncThunk<void, undefined, {
       const {data: {email}} = await axiosApi.get<UserType>(APIPath.Verify);
       dispatch(updateAuthStatus(AuthStatus.Auth));
       dispatch(setEmail(email));
-    } catch {
+    } catch (message) {
       dispatch(updateAuthStatus(AuthStatus.NoAuth));
-      dispatch(clearErrorAction(ErrorMessage.UserUnauthorised));
+      dispatch(clearErrorAction(`${ErrorMessage.UserUnauthorised}: ${message}`));
     }
   },
 );
@@ -155,9 +157,9 @@ export const loginUserAction = createAsyncThunk<void, LoginType, {
       dispatch(updateAuthStatus(AuthStatus.Auth));
       dispatch(setEmail(loginUser.email));
       dispatch(redirectToRoute(AppRoute.Products));
-    } catch {
+    } catch (message) {
       dispatch(updateAuthStatus(AuthStatus.NoAuth));
-      dispatch(clearErrorAction(ErrorMessage.FailedUserLogin));
+      dispatch(clearErrorAction(`${ErrorMessage.FailedUserLogin}: ${message}`));
     }
-  },
+  }
 );

@@ -1,11 +1,14 @@
 import { Link, useLocation } from 'react-router-dom';
 import { AppRoute } from '../../const';
+import { useAppSelector } from '../../hooks/hooks';
+import { selectEmail } from '../../store/user/user.selectors';
 
 type NavigationListProps = {
   isAuthorised: boolean
 };
 
 export default function NavigationList ({isAuthorised}: NavigationListProps): JSX.Element {
+  const userEmail = useAppSelector(selectEmail);
   return (
     <>
       <nav className="main-nav">
@@ -28,7 +31,7 @@ export default function NavigationList ({isAuthorised}: NavigationListProps): JS
         </ul>
       </nav>
       <div className="header__container">
-        <span className="header__user-name">Имя</span>
+        <span className="header__user-name">{userEmail}</span>
         <Link className="header__link" to={AppRoute.Login} aria-label="Перейти в личный кабинет">
           <svg className="header__link-icon" width="12" height="14" aria-hidden="true">
             <use xlinkHref="#icon-account"></use>

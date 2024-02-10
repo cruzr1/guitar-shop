@@ -119,3 +119,4 @@ export const NAME_REGEX = /^.{1,15}$/;
 export const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
 export const NULL_LENGTH = 0;
+
