@@ -12,9 +12,9 @@ export default function ProductPage (): JSX.Element {
       </Helmet>
         <h1 className="page-content__title title title--bigger">Товар</h1>
         <Breadcrumbs isProduct />
-        <div className="product-container"><img className="product-container__img" src={product.imageURL} srcSet={product.imageURL} width="90" height="235" alt={product.model}/>
+        <div className="product-container"><img className="product-container__img" src={product.imageURL} srcSet={product.imageURL} width="90" height="235" alt={product.name}/>
           <div className="product-container__info-wrapper">
-            <h2 className="product-container__title title title--big title--uppercase">{product.model}</h2>
+            <h2 className="product-container__title title title--big title--uppercase">{product.name}</h2>
             <br/>
             <br/>
             <Tabs />

@@ -4,7 +4,7 @@ import { NameSpace } from '../../const';
 export const selectGuitarDetailsLoadingStatus = (state: StateType) => state[NameSpace.GuitarForm].guitarFormLoadingStatus;
 export const selectGuitarDetailsLoadingErrorStatus = (state: StateType) => state[NameSpace.GuitarForm].hasGuitarFormError;
 export const selectGuitarId = (state: StateType) => state[NameSpace.GuitarForm].id;
-export const selectGuitarModel = (state: StateType) => state[NameSpace.GuitarForm].model;
+export const selectGuitarName = (state: StateType) => state[NameSpace.GuitarForm].name;
 export const selectGuitarDescription = (state: StateType) => state[NameSpace.GuitarForm].description;
 export const selectGuitarCreatedDate = (state: StateType) => state[NameSpace.GuitarForm].createdAt;
 export const selectGuitarImageURL = (state: StateType) => state[NameSpace.GuitarForm].imageURL;

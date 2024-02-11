@@ -5,7 +5,7 @@ import { postGuitarFormAction} from '../api-actions';
 
 export type GuitarFormStateType = {
   id: string;
-  model: string;
+  name: string;
   description: string;
   createdAt: Date | '';
   imageURL: string;
@@ -19,7 +19,7 @@ export type GuitarFormStateType = {
 
 const guitarFormState: GuitarFormStateType = {
   id: '',
-  model: '',
+  name: '',
   description: '',
   createdAt: '',
   imageURL: '',
@@ -36,7 +36,7 @@ export const guitarForm = createSlice({
   initialState: guitarFormState,
   reducers: {
     setGuitarId: (state, {payload}: PayloadAction<string>) => {
-      state.model = payload;
+      state.name = payload;
     },
     setDescription: (state, {payload}: PayloadAction<string>) => {
       state.description = payload;
@@ -61,7 +61,7 @@ export const guitarForm = createSlice({
     },
     resetGuitarFormData: (state) => {
       state.id = '';
-      state.model = '';
+      state.name = '';
       state.description = '';
       state.createdAt = '';
       state.imageURL = '';

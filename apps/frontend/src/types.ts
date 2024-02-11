@@ -17,7 +17,7 @@ export type SortOrderFieldType = 'price' | 'createdAt';
 
 export type GuitarType = {
   id: string;
-  model: string;
+  name: string;
   description: string;
   createdAt: Date;
   imageURL: string;

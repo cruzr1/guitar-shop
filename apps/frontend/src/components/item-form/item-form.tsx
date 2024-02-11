@@ -8,7 +8,7 @@ type ItemFormProps = {
 
 export default function ItemForm ({isAddForm}: ItemFormProps):JSX.Element {
   const classPrefix = isAddForm ? 'add' : 'edit';
-  const model = 'ZX Spectrum';
+  const name = 'ZX Spectrum';
   const createdAt = '08.02.2024';
   const article ='CLSU3455678';
   const description = ' Plucked stringed instrument. It normally has six strings, a fretted fingerboard, and a soundbox with a pronounced waist. It probably originated in Spain in the early 16th century. By 1800 it was being strung with six single strings; 19th-century innovations gave it its modern form.'
@@ -19,13 +19,13 @@ export default function ItemForm ({isAddForm}: ItemFormProps):JSX.Element {
   return (
     <section className={`${classPrefix}-item`}>
       <div className="container">
-        <h1 className={`${classPrefix}-item__title`}>{isAddForm ? 'Новый товар' : model}</h1>
-        <Breadcrumbs model={isAddForm ? 'Новый товар' : model} />
+        <h1 className={`${classPrefix}-item__title`}>{isAddForm ? 'Новый товар' : name}</h1>
+        <Breadcrumbs name={isAddForm ? 'Новый товар' : name} />
         <form className={`${classPrefix}-item__form`} action="#" method="get">
           <div className={`${classPrefix}-item__form-left`}>
             <div className={`edit-item-image ${classPrefix}-item__form-image`}>
               <div className="edit-item-image__image-wrap">
-                {!isAddForm && <img className="edit-item-image__image" src="img/content/add-item-1.png" srcSet="img/content/add-item-1@2x.png 2x" width="133" height="332" alt={isAddForm ? "" : model}/>}
+                {!isAddForm && <img className="edit-item-image__image" src="img/content/add-item-1.png" srcSet="img/content/add-item-1@2x.png 2x" width="133" height="332" alt={isAddForm ? "" : name}/>}
               </div>
               <div className="edit-item-image__btn-wrap">
                 <button className="button button--small button--black-border edit-item-image__btn">Добавить
@@ -59,7 +59,7 @@ export default function ItemForm ({isAddForm}: ItemFormProps):JSX.Element {
             </div>
             <div className={`custom-input ${classPrefix}-item__form-input`}>
               <label><span>{isAddForm ? 'Введите наименование товара' : 'Наименование товара'}</span>
-                <input type="text" name="title" value={isAddForm ? "" : model} placeholder="Наименование"/>
+                <input type="text" name="title" value={isAddForm ? "" : name} placeholder="Наименование"/>
               </label>
               <RequiredFieldComment />
             </div>
