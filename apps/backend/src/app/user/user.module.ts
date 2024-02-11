@@ -9,6 +9,7 @@ import { UserSchema, UserModel} from './user.model';
 import { getJwtOptions } from "@guitar-shop/config/backend";
 import { UserService } from './user.service';
 import { UserRepository } from './user.repository';
+import { MailModule } from '../mail/mail.module';
 
 
 @Module({
@@ -20,7 +21,8 @@ import { UserRepository } from './user.repository';
     MongooseModule.forFeature([
       {name: UserModel.name, schema: UserSchema}
     ]),
-    RefreshTokenModule
+    RefreshTokenModule,
+    MailModule
   ],
   providers: [
     JwtAccessStrategy,

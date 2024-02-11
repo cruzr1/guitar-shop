@@ -33,6 +33,14 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: test
       ME_CONFIG_MONGODB_URL: mongodb://admin:test@guitar-shop.mongo:27017/
 
+  guitar-shop.notify.fakesmtp:
+    image: gessnerfl/fake-smtp-server:2.2.0
+    container_name: "guitar-shop.notify.fakesmtp"
+    hostname: "guitar-shop.notify.fakesmtp"
+    ports:
+      - "8025:8025"
+      - "1083:8080"
+
 volumes:
   guitar-shop.mongo:
 

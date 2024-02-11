@@ -5,6 +5,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { UserModule } from './user/user.module';
 import { GuitarModule } from './guitar/guitar.module';
+import { MailModule } from './mail/mail.module';
 
 @Module({
   imports: [
@@ -17,7 +18,8 @@ import { GuitarModule } from './guitar/guitar.module';
       useFactory: getJwtOptions,
     }),
     UserModule,
-    GuitarModule
+    GuitarModule,
+    MailModule
   ],
   controllers: [],
   providers: [],

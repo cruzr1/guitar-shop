@@ -10,12 +10,14 @@ import { LocalAuthGuard } from '../guards/local-auth.guard';
 import { RequestWithUser, RequestWithTokenPayload, Token, TokenPayload } from '@guitar-shop/types';
 import { JwtRefreshGuard } from '../guards/jwt-refresh.guard';
 import { MongoIdValidationPipe } from "../pipes/mongo-id-validation.pipe";
+import { MailService } from '../mail/mail.service';
 
 @ApiTags('user')
 @Controller('user')
 export class UserController {
   constructor(
     private readonly userService: UserService,
+    private readonly mailService: MailService
   ) {}
 
   @ApiResponse({
@@ -25,6 +27,7 @@ export class UserController {
   @Post('signin')
   public async create(@Body() dto: CreateUserDto): Promise<UserRdo> {
     const newUser = await this.userService.registerNewUser(dto);
+    await this.mailService.sendNotifyNewUser(dto);
     return fillDTO(UserRdo, newUser.toPOJO());
   }
 
