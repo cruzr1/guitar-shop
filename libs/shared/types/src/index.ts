@@ -15,4 +15,6 @@ export * from './lib/strings-count.type';
 export * from './lib/sort-by-query.type';
 export * from './lib/pagination-result.interface';
 export * from './lib/entities-with-pagination.rdo';
+export * from './lib/database-client.interface';
+export * from './lib/mock-guitar-data.type';
 

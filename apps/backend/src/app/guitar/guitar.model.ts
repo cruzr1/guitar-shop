@@ -2,11 +2,13 @@ import { Document } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Guitar, GuitarCategoryType, StringsCountType } from '@guitar-shop/types';
 import { GuitarCategory, STRINGS } from './guitar.constant';
+import { Injectable } from '@nestjs/common';
 
 @Schema({
   collection: 'guitars',
   timestamps: true
 })
+@Injectable()
 export class GuitarModel extends Document implements Guitar {
   @Prop({
     required: true
