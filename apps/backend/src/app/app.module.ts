@@ -4,6 +4,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { UserModule } from './user/user.module';
+import { GuitarModule } from './guitar/guitar.module';
 
 @Module({
   imports: [
@@ -15,7 +16,8 @@ import { UserModule } from './user/user.module';
       inject: [ConfigService],
       useFactory: getJwtOptions,
     }),
-    UserModule
+    UserModule,
+    GuitarModule
   ],
   controllers: [],
   providers: [],
