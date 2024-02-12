@@ -8,7 +8,10 @@ import browserHistory from './browser-history';
 import ErrorMessage from './components/error-message/error-message';
 
 import { authoriseUserAction } from './store/api-actions';
+import { updateAuthStatus } from './store/user/user.slice';
+import { AuthStatus } from './const';
 
+store.dispatch(updateAuthStatus(AuthStatus.Unknown));
 store.dispatch(authoriseUserAction());
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
