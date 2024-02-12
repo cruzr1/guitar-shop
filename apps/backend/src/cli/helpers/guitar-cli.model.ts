@@ -11,7 +11,7 @@ import { GuitarCategory, STRINGS } from '../../app/guitar/guitar.constant';
     allowMixed: Severity.ALLOW
   }
 })
-export class GuitarEntity extends defaultClasses.TimeStamps implements Guitar {
+export class GuitarCLIEntity extends defaultClasses.TimeStamps implements Guitar {
   @prop({
     required: false
   })
@@ -78,4 +78,4 @@ export class GuitarEntity extends defaultClasses.TimeStamps implements Guitar {
   }
 }
 
-export const GuitarModel = getModelForClass(GuitarEntity);
+export const GuitarModel = getModelForClass(GuitarCLIEntity);
