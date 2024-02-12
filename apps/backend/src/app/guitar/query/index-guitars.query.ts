@@ -10,7 +10,6 @@ export class IndexGuitarsQuery {
     example: 'electric'
   })
   @IsOptional()
-  @Transform(({value}) => value.split(','))
   @IsArray({message: GuitarValidationMessage.Type.NotAnArray})
   @IsIn(Object.values(GuitarCategory), {each: true, message: GuitarValidationMessage.Type.InvalidFormat})
   public type?: GuitarCategoryType[];
@@ -20,7 +19,6 @@ export class IndexGuitarsQuery {
     example: '4'
   })
   @IsOptional()
-  @Transform(({value}) => value.split(','))
   @IsArray({message: GuitarValidationMessage.StringsCount.NotAnArray})
   @IsIn(STRINGS, {each: true, message: GuitarValidationMessage.StringsCount.InvalidFormat})
   public stringsCount?: StringsCountType[];

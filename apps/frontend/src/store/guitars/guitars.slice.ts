@@ -1,16 +1,20 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { loadGuitarsAction } from '../api-actions';
-import { NameSpace, RequestStatus } from '../../const';
+import { NameSpace, RequestStatus, DEFAULT_PAGE_NUMBER } from '../../const';
 import { GuitarType, RequestStatusType } from '../../types'
 
 export type GuitarsStateType = {
   guitars: GuitarType[];
+  currentPage: number;
+  totalPages: number;
   guitarsLoadingStatus: RequestStatusType;
   hasDataError: boolean;
 }
 
 const guitarsState: GuitarsStateType = {
   guitars: [],
+  currentPage: DEFAULT_PAGE_NUMBER,
+  totalPages: DEFAULT_PAGE_NUMBER,
   guitarsLoadingStatus: RequestStatus.Idle,
   hasDataError: false
 };
@@ -21,6 +25,12 @@ export const guitars = createSlice({
   reducers: {
     loadGuitars: (state, {payload}: PayloadAction<GuitarType[]>) => {
       state.guitars = payload;
+    },
+    updateCurrentPageNumber: (state, {payload}: PayloadAction<number>) => {
+      state.currentPage = payload;
+    },
+    updateTotalPagesNumber: (state, {payload}: PayloadAction<number>) => {
+      state.totalPages = payload;
     },
     addGuitar: (state, {payload}: PayloadAction<GuitarType>) => {
       state.guitars.push(payload);
@@ -50,6 +60,8 @@ export const guitars = createSlice({
 
 export const {
   loadGuitars,
+  updateCurrentPageNumber,
+  updateTotalPagesNumber,
   addGuitar,
   updateGuitar,
   removeGuitar

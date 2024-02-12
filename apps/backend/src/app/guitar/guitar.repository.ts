@@ -1,4 +1,4 @@
-import { Model } from 'mongoose';
+import { FilterQuery, Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { Injectable } from '@nestjs/common';
 import { BaseMongoRepository, Guitar, PaginationResult } from '@guitar-shop/types';
@@ -16,10 +16,13 @@ export class GuitarRepository extends BaseMongoRepository<GuitarEntity, Guitar> 
   }
 
   public async findMany({type, stringsCount, page, sortByField, sortByOrder}: IndexGuitarsQuery): Promise<PaginationResult<GuitarEntity>> {
-    const query = {
-      type: { $in: type },
-      stringsCount: { $in: stringsCount }
-    };
+    const query:FilterQuery<IndexGuitarsQuery> = {};
+    if (type) {
+      query.type = { $in: type };
+    }
+    if (stringsCount) {
+      query.stringsCount = { $in: stringsCount };
+    }
     const skip = (page - DEFAULT_PAGE_NUMBER) * GUITAR_LIST_REUQEST_COUNT;
     const orderBy = {[sortByField]: sortByOrder};
     const limit = GUITAR_LIST_REUQEST_COUNT

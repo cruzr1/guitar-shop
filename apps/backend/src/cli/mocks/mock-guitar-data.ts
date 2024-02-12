@@ -21,13 +21,13 @@ export const mockGuitarData = {
 
   ],
   imageURLs: [
-    'markup/img/content/catalog-product-1.png',
-    'markup/img/content/catalog-product-2.png',
-    'markup/img/content/catalog-product-3.png',
-    'markup/img/content/catalog-product-4.png',
-    'markup/img/content/catalog-product-5.png',
-    'markup/img/content/catalog-product-6.png',
-    'markup/img/content/catalog-product-7.png',
-    'markup/img/content/catalog-product-8.png',
+    'img/content/catalog-product-1.png',
+    'img/content/catalog-product-2.png',
+    'img/content/catalog-product-3.png',
+    'img/content/catalog-product-4.png',
+    'img/content/catalog-product-5.png',
+    'img/content/catalog-product-6.png',
+    'img/content/catalog-product-7.png',
+    'img/content/catalog-product-8.png',
   ],
 }

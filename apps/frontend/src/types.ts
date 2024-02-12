@@ -1,5 +1,5 @@
 import { store } from "./store/store";
-import { AppRoute, RequestStatus } from './const';
+import { AppRoute, GuitarCategory, RequestStatus } from './const';
 
 export type StringsCountType = 4 | 6 | 7 | 12;
 
@@ -25,6 +25,14 @@ export type GuitarType = {
   article: string,
   price: number;
   stringsCount: StringsCountType
+}
+
+export type GuitarsQuery = {
+  type?: GuitarCategoryType[];
+  stringsCount?: StringsCountType[];
+  page?: number;
+  sortByField?: SortOrderFieldType;
+  sortByOrder?: "asc" | "desc";
 }
 
 export type NewGuitarType = Omit<GuitarType, 'id' | 'createdAt'>

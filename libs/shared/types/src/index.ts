@@ -17,4 +17,5 @@ export * from './lib/pagination-result.interface';
 export * from './lib/entities-with-pagination.rdo';
 export * from './lib/database-client.interface';
 export * from './lib/mock-guitar-data.type';
+export * from './lib/guitars-query.type';
 

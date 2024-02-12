@@ -1,5 +1,5 @@
 import { ApiTags, ApiResponse } from '@nestjs/swagger';
-import { Controller, HttpStatus, HttpCode, Post, Body, Query, Param, Get, UseGuards, Patch, Delete } from '@nestjs/common';
+import { Controller, HttpStatus, HttpCode, Post, Body, Param, Get, UseGuards, Patch, Delete, Query} from '@nestjs/common';
 import {CheckAuthGuard} from '../guards/check-auth.guard'
 import { GuitarService } from './guitar.service';
 import { CreateNewGuitarDto } from './dto/create-new-guitar.dto';
@@ -36,7 +36,8 @@ export class GuitarController {
   })
   @UseGuards(CheckAuthGuard)
   @Get('/')
-  public async index(@Query() query: IndexGuitarsQuery): Promise<EntitiesWithPaginationRdo<GuitarRdo>> {
+  public async index(@Query() query?: IndexGuitarsQuery): Promise<EntitiesWithPaginationRdo<GuitarRdo>> {
+    console.log(query)
     const guitarsWithPagination = await this.guitarService.indexGuitars(query);
     return {
       ...guitarsWithPagination,

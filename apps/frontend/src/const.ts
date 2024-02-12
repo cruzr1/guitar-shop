@@ -25,21 +25,24 @@ export const Networks = {
 
 export const GuitarCategory = {
   Acoustic: {
-    name: 'Акустическая гитара',
     id: 'guitar',
     filterId: 'acoustic'
   },
   Electric: {
-    name: 'Электрогитара',
     id: 'el-guitar',
     filterId: 'electric'
   },
   Ukulele: {
-    name: 'Укулеле',
     id: 'ukulele',
     filterId: 'ukulele'
   },
 } as const;
+
+export const GuitarNames = {
+  [GuitarCategory.Acoustic.filterId]: 'Акустическая гитара',
+  [GuitarCategory.Electric.filterId]: 'Электрогитара',
+  [GuitarCategory.Ukulele.filterId]: 'Укулеле',
+}
 
 
 export const PaginationParams = {
@@ -85,8 +88,8 @@ export const RequestStatus = {
 } as const;
 
 export const APIPath = {
-  Guitars: '/guitars',
-  GuitarId: '/guitars/:guitarId',
+  Guitars: '/guitar',
+  GuitarId: '/guitar/:guitarId',
   Signin: 'user/signin',
   Login: 'user/login',
   Verify: 'user/check',
@@ -119,4 +122,10 @@ export const NAME_REGEX = /^.{1,15}$/;
 export const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
 export const NULL_LENGTH = 0;
+
+export const DEFAULT_PAGE_NUMBER = 1;
+
+export const DEFAULT_SORT_BY_FIELD = 'createdAt';
+
+export const DEFAULT_SORT_BY_ORDER = 'asc';
 

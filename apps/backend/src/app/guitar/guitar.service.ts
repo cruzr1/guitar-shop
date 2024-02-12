@@ -20,6 +20,10 @@ export class GuitarService {
     return await this.guitarRepository.save(newGuitar);
   }
 
+  public async indexGuitars(query?: IndexGuitarsQuery): Promise<PaginationResult<GuitarEntity>> {
+    return await this.guitarRepository.findMany(query);
+ }
+
   public async getGuitarEntity(guitarId: string): Promise<GuitarEntity> {
     const existGuitar = await this.guitarRepository.findById(guitarId);
     if (!existGuitar) {
@@ -40,8 +44,6 @@ export class GuitarService {
     await this.guitarRepository.deleteById(existGuitar.id);
   }
 
-  public async indexGuitars(query?: IndexGuitarsQuery): Promise<PaginationResult<GuitarEntity>> {
-    return await this.guitarRepository.findMany(query);
- }
+
 
 }

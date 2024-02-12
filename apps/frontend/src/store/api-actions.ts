@@ -1,13 +1,16 @@
-import { AxiosError, AxiosInstance } from 'axios';
+import {  AxiosInstance } from 'axios';
 import { generatePath } from 'react-router-dom';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { addGuitar, loadGuitars, removeGuitar, updateGuitar } from './guitars/guitars.slice';
+import {EntitiesWithPaginationRdo} from '@guitar-shop/types';
+import { IndexGuitarsQuery } from 'apps/backend/src/app/guitar/query/index-guitars.query'
+import { addGuitar, loadGuitars, removeGuitar, updateCurrentPageNumber, updateGuitar, updateTotalPagesNumber } from './guitars/guitars.slice';
 import { setError } from './error/error.slice';
 import { updateAuthStatus, setEmail } from './user/user.slice';
 import { setToken} from '../services/token';
 import { redirectToRoute } from './action';
+import { adaptGuitarsQueryToServer } from '../adapters/adapters-to-server';
 import { NameSpace, Action, APIPath, ErrorMessage, TIMEOUT_SHOW_ERROR, AuthStatus, AppRoute } from '../const';
-import { GuitarType, AppDispatchType, StateType, LoginType, LoggedUserType, SigninType, UserType, NewGuitarType } from '../types';
+import { GuitarType, AppDispatchType, StateType, LoginType, LoggedUserType, SigninType, UserType, NewGuitarType, GuitarsQuery } from '../types';
 
 
 export const clearErrorAction = createAsyncThunk<void, string, {
@@ -24,7 +27,8 @@ export const clearErrorAction = createAsyncThunk<void, string, {
   },
 );
 
-export const loadGuitarsAction = createAsyncThunk<void | undefined, undefined, {
+
+export const loadGuitarsAction = createAsyncThunk<void | undefined, GuitarsQuery, {
   dispatch: AppDispatchType;
   state: StateType;
   extra: AxiosInstance;
@@ -32,10 +36,14 @@ export const loadGuitarsAction = createAsyncThunk<void | undefined, undefined, {
 >
 (
   `${NameSpace.Guitars}/${Action.Get}`,
-  async (_arg, {dispatch, extra: axiosApi}) => {
+  async (query, {dispatch, extra: axiosApi}) => {
     try {
-      const {data} = await axiosApi.get<GuitarType[]>(APIPath.Guitars);
-      dispatch(loadGuitars(data))
+      const {data: {entities, totalPages, currentPage}} = await axiosApi.get<EntitiesWithPaginationRdo<GuitarType>>(APIPath.Guitars, {
+        params : {...query}
+      });
+      dispatch(loadGuitars(entities));
+      dispatch(updateCurrentPageNumber(currentPage));
+      dispatch(updateTotalPagesNumber(totalPages));
     } catch (message) {
       dispatch(clearErrorAction(`${ErrorMessage.FailedLoadGuitars}: ${message}`));
 
