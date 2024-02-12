@@ -132,7 +132,7 @@ export const authoriseUserAction = createAsyncThunk<void, undefined, {
   `${NameSpace.User}/${Action.Get}`,
   async (_arg, {dispatch, extra: axiosApi}) => {
     try {
-      const {data: {email}} = await axiosApi.get<UserType>(APIPath.Verify);
+      const {data: {email}} = await axiosApi.post<UserType>(APIPath.Verify, {});
       dispatch(updateAuthStatus(AuthStatus.Auth));
       dispatch(setEmail(email));
     } catch (message) {

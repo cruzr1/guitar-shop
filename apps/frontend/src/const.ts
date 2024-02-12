@@ -89,7 +89,7 @@ export const APIPath = {
   GuitarId: '/guitars/:guitarId',
   Signin: 'user/signin',
   Login: 'user/login',
-  Verify: 'user/verify',
+  Verify: 'user/check',
   Logout: 'user/logout',
 } as const;
 
