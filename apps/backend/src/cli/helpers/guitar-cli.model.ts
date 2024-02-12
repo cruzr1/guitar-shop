@@ -78,4 +78,4 @@ export class GuitarCLIEntity extends defaultClasses.TimeStamps implements Guitar
   }
 }
 
-export const GuitarModel = getModelForClass(GuitarCLIEntity);
+export const GuitarCLIModel = getModelForClass(GuitarCLIEntity);
