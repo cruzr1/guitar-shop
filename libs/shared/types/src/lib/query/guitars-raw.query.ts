@@ -1,27 +1,23 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import { IsOptional, IsIn, IsArray } from 'class-validator';
-import {SortByQuery, SortByOrder, GuitarCategoryType, StringsCountType } from '@guitar-shop/types';
-import { GUITAR_SORT_BY_FIELDS, GUITAR_SORT_BY_ORDERS, GuitarCategory, STRINGS, DEFAULT_PAGE_NUMBER, DEFAULT_SORT_BY_FIELD, DEFAULT_SORT_BY_ORDER, GuitarValidationMessage } from '../guitar.constant';
+import { IsOptional, IsIn } from 'class-validator';
+import {SortByQuery, SortByOrder } from '../../index';
+import { GUITAR_SORT_BY_FIELDS, GUITAR_SORT_BY_ORDERS, DEFAULT_PAGE_NUMBER, DEFAULT_SORT_BY_FIELD, DEFAULT_SORT_BY_ORDER, GuitarValidationMessage } from './guitar.constant';
 
-export class IndexGuitarsQuery {
+export class GuitarsRawQuery {
   @ApiProperty({
     description: 'Guitar type',
     example: 'electric'
   })
   @IsOptional()
-  @IsArray({message: GuitarValidationMessage.Type.NotAnArray})
-  @IsIn(Object.values(GuitarCategory), {each: true, message: GuitarValidationMessage.Type.InvalidFormat})
-  public type?: GuitarCategoryType[];
+   public type?: string;
 
   @ApiProperty({
     description: 'Guitar strings count',
     example: '4'
   })
   @IsOptional()
-  @IsArray({message: GuitarValidationMessage.StringsCount.NotAnArray})
-  @IsIn(STRINGS, {each: true, message: GuitarValidationMessage.StringsCount.InvalidFormat})
-  public stringsCount?: StringsCountType[];
+  public stringsCount?: string;
 
   @ApiProperty({
     description: 'Page number',

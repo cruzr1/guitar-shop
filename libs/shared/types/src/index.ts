@@ -18,4 +18,7 @@ export * from './lib/entities-with-pagination.rdo';
 export * from './lib/database-client.interface';
 export * from './lib/mock-guitar-data.type';
 export * from './lib/guitars-query.type';
+export * from './lib/query/index-guitars.query';
+export * from './lib/query/guitar.constant';
+export * from './lib/query/guitars-raw.query';
 

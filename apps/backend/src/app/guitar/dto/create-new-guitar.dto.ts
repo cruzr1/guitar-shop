@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsString, IsArray, Matches, IsIn, Length, Min, Max } from 'class-validator';
 import { GuitarCategoryType, StringsCountType } from '@guitar-shop/types';
-import { GuitarCategory, STRINGS, GuitarValidationParams } from '../guitar.constant';
+import { GuitarCategory, STRINGS, GuitarValidationParams } from '../../../../../../libs/shared/types/src/lib/query/guitar.constant';
 
 export class CreateNewGuitarDto {
   @ApiProperty({

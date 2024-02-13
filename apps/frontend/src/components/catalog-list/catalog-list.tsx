@@ -3,28 +3,35 @@ import FailedLoading from '../failed-loading/failed-loading';
 import CatalogItem from '../../components/catalog-item/catalog-item';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { loadGuitarsAction } from '../../store/api-actions';
-import { selectGuitars, selectGuitarsLoadingErrorStatus, selectGuitarsLoadingStatus } from '../../store/guitars/guitars.selectors';
+import { selectGuitarsLoadingErrorStatus, selectGuitarsLoadingStatus, selectGuitars, selectGuitarsSorted, selectCurrentPageNumber } from '../../store/guitars/guitars.selectors';
 import { isStatusFulfilled, isStatusPending } from '../../helpers';
+import { selectActiveSortField, selectActiveSortOrder, selectGuitarTypeFilter, selectStringsCountFilter } from '../../store/guitar-list/guitar-list.selectors';
+import LoadingPage from '../../pages/loading-page/loading-page';
 
 
 export default function CatalogList (): JSX.Element {
   const dispatch = useAppDispatch();
+  const sortByField = useAppSelector(selectActiveSortField);
+  const sortByOrder = useAppSelector(selectActiveSortOrder);
+  const page = useAppSelector(selectCurrentPageNumber);
+  const stringsCount = useAppSelector(selectStringsCountFilter);
+  const type = useAppSelector(selectGuitarTypeFilter)
   useEffect(() =>{
     let isMounted = true;
     if (isMounted) {
-      dispatch(loadGuitarsAction({}));
+      dispatch(loadGuitarsAction({type, stringsCount, page, sortByField, sortByOrder}));
     }
     return () => {
       isMounted = false;
     };
-  },[dispatch]);
-  const guitarList = useAppSelector(selectGuitars);
+  },[dispatch, type, stringsCount, page, sortByField, sortByOrder]);
+  const guitarList = useAppSelector(selectGuitarsSorted);
   const hasError= useAppSelector(selectGuitarsLoadingErrorStatus);
   const guitarLoadingStatus = useAppSelector(selectGuitarsLoadingStatus);
   return (
     <>
       {hasError && <FailedLoading />}
-      {isStatusPending(guitarLoadingStatus) && <FailedLoading />}
+      {isStatusPending(guitarLoadingStatus) && <LoadingPage />}
       {!hasError && isStatusFulfilled(guitarLoadingStatus) &&
         <div className="catalog-cards">
           <ul className="catalog-cards__list">

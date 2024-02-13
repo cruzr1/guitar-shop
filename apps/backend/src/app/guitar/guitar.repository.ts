@@ -1,11 +1,9 @@
 import { FilterQuery, Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { Injectable } from '@nestjs/common';
-import { BaseMongoRepository, Guitar, PaginationResult } from '@guitar-shop/types';
+import { BaseMongoRepository, Guitar, PaginationResult, IndexGuitarsQuery, GUITAR_LIST_REUQEST_COUNT, DEFAULT_PAGE_NUMBER } from '@guitar-shop/types';
 import { GuitarModel } from './guitar.model';
 import { GuitarEntity } from './guitar.entity';
-import { IndexGuitarsQuery } from './query/index-guitars.query';
-import { GUITAR_LIST_REUQEST_COUNT, DEFAULT_PAGE_NUMBER } from './guitar.constant';
 
 @Injectable()
 export class GuitarRepository extends BaseMongoRepository<GuitarEntity, Guitar> {

@@ -12,3 +12,4 @@ export const isStatusPending = (status: RequestStatusType) => status === Request
 export const isStatusFulfilled = (status: RequestStatusType) => status === RequestStatus.Fulfilled;
 
 export const isStatusRejected = (status: RequestStatusType) => status === RequestStatus.Rejected;
+

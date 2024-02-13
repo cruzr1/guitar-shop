@@ -4,9 +4,8 @@ import {CheckAuthGuard} from '../guards/check-auth.guard'
 import { GuitarService } from './guitar.service';
 import { CreateNewGuitarDto } from './dto/create-new-guitar.dto';
 import { GuitarRdo } from './rdo/guitar-rdo';
-import { fillDTO } from '@guitar-shop/helpers';
-import { IndexGuitarsQuery } from './query/index-guitars.query';
-import { EntitiesWithPaginationRdo } from '@guitar-shop/types';
+import { fillDTO, adaptDataToService} from '@guitar-shop/helpers';
+import { IndexGuitarsQuery, EntitiesWithPaginationRdo, GuitarsRawQuery } from '@guitar-shop/types';
 import { UpdateGuitarDto } from './dto/update-guitar.dto';
 
 
@@ -36,9 +35,9 @@ export class GuitarController {
   })
   @UseGuards(CheckAuthGuard)
   @Get('/')
-  public async index(@Query() query?: IndexGuitarsQuery): Promise<EntitiesWithPaginationRdo<GuitarRdo>> {
-    console.log(query)
-    const guitarsWithPagination = await this.guitarService.indexGuitars(query);
+  public async index(@Query() query?: GuitarsRawQuery): Promise<EntitiesWithPaginationRdo<GuitarRdo>> {
+    const newQuery: IndexGuitarsQuery = adaptDataToService(query);
+    const guitarsWithPagination = await this.guitarService.indexGuitars(newQuery);
     return {
       ...guitarsWithPagination,
       entities: guitarsWithPagination.entities.map((guitar) => fillDTO(GuitarRdo, guitar.toPOJO()))

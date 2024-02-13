@@ -1,6 +1,6 @@
 import { defaultClasses, getModelForClass, prop, modelOptions, Severity } from '@typegoose/typegoose'
 import { Guitar, GuitarCategoryType, StringsCountType } from '@guitar-shop/types';
-import { GuitarCategory, STRINGS } from '../../app/guitar/guitar.constant';
+import { GuitarCategory, STRINGS } from '../../../../../libs/shared/types/src/lib/query/guitar.constant';
 
 
 @modelOptions({

@@ -2,7 +2,6 @@ import {  AxiosInstance } from 'axios';
 import { generatePath } from 'react-router-dom';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import {EntitiesWithPaginationRdo} from '@guitar-shop/types';
-import { IndexGuitarsQuery } from 'apps/backend/src/app/guitar/query/index-guitars.query'
 import { addGuitar, loadGuitars, removeGuitar, updateCurrentPageNumber, updateGuitar, updateTotalPagesNumber } from './guitars/guitars.slice';
 import { setError } from './error/error.slice';
 import { updateAuthStatus, setEmail } from './user/user.slice';
@@ -38,8 +37,9 @@ export const loadGuitarsAction = createAsyncThunk<void | undefined, GuitarsQuery
   `${NameSpace.Guitars}/${Action.Get}`,
   async (query, {dispatch, extra: axiosApi}) => {
     try {
+      console.log(adaptGuitarsQueryToServer(query));
       const {data: {entities, totalPages, currentPage}} = await axiosApi.get<EntitiesWithPaginationRdo<GuitarType>>(APIPath.Guitars, {
-        params : {...query}
+        params : {...adaptGuitarsQueryToServer(query)}
       });
       dispatch(loadGuitars(entities));
       dispatch(updateCurrentPageNumber(currentPage));

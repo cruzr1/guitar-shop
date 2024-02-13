@@ -1,6 +1,5 @@
 import { DateTimeUnit, TimeAndUnit } from "@guitar-shop/types";
 
-
 export function parseTime(time: string): TimeAndUnit {
   const regex = /^(\d+)([shdmy])/;
   const match = regex.exec(time);
@@ -15,4 +14,3 @@ export function parseTime(time: string): TimeAndUnit {
   }
   return { value, unit }
 }
-

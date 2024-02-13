@@ -1,6 +1,6 @@
 import { generateRandomValue, getRandomItem } from './common';
 import { Guitar, GuitarCategoryType, MockGuitarDataType, StringsCountType } from '@guitar-shop/types';
-import { GuitarCategory, GuitarValidationParams, STRINGS } from '../../app/guitar/guitar.constant';
+import { GuitarCategory, GuitarValidationParams, STRINGS } from '../../../../../libs/shared/types/src/lib/query/guitar.constant';
 import { randomUUID } from 'crypto';
 
 export function generateGuitar(mockGuitarData: MockGuitarDataType):Guitar {

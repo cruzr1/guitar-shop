@@ -1,7 +1,7 @@
 import { Document } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Guitar, GuitarCategoryType, StringsCountType } from '@guitar-shop/types';
-import { GuitarCategory, STRINGS } from './guitar.constant';
+import { GuitarCategory, STRINGS } from '../../../../../libs/shared/types/src/lib/query/guitar.constant';
 import { Injectable } from '@nestjs/common';
 
 @Schema({

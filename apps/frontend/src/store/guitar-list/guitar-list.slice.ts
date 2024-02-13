@@ -1,4 +1,4 @@
-import { NameSpace } from '../../const';
+import { NameSpace, SortOrder, SortOrderField } from '../../const';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { GuitarCategoryType, SortOrderFieldType, SortOrderType, StringsCountType } from '../../types';
 
@@ -12,8 +12,8 @@ export type GuitarListStateType = {
 export const guitarListState: GuitarListStateType = {
   guitarTypeFilter: ['electric', 'ukulele'],
   stringsCountFilter: [4, 6],
-  activeSortOrder: 'asc',
-  activeSortField: 'createdAt'
+  activeSortOrder: SortOrder.Asc,
+  activeSortField: SortOrderField.CreatedAt,
 };
 
 export const guitarList = createSlice({

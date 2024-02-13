@@ -129,3 +129,12 @@ export const DEFAULT_SORT_BY_FIELD = 'createdAt';
 
 export const DEFAULT_SORT_BY_ORDER = 'asc';
 
+export const SortOrder = {
+  Asc: 'asc',
+  Desc: 'desc',
+} as const;
+
+export const SortOrderField = {
+  Price: 'price',
+  CreatedAt: 'createdAt'
+} as const;

@@ -1,12 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { NotFoundException } from '@nestjs/common';
-import { PaginationResult } from '@guitar-shop/types';
+import { PaginationResult, IndexGuitarsQuery, GuitarExceptionMessage } from '@guitar-shop/types';
 import { GuitarEntity } from './guitar.entity';
 import { CreateNewGuitarDto } from './dto/create-new-guitar.dto';
-import { IndexGuitarsQuery} from './query/index-guitars.query';
 import { UpdateGuitarDto } from './dto/update-guitar.dto';
 import { GuitarRepository } from './guitar.repository';
-import { GuitarExceptionMessage } from './guitar.constant';
 
 
 @Injectable()
