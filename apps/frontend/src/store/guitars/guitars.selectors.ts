@@ -9,6 +9,7 @@ export const selectCurrentPageNumber = (state: StateType) => state[NameSpace.Gui
 export const selectTotalPagesNumber = (state: StateType) => state[NameSpace.Guitars].totalPages;
 export const selectGuitarsLoadingStatus = (state: StateType) => state[NameSpace.Guitars].guitarsLoadingStatus;
 export const selectGuitarsLoadingErrorStatus = (state: StateType) => state[NameSpace.Guitars].hasDataError;
+export const selectGuitarsShouldUpdateStatus = (state: StateType) => state[NameSpace.Guitars].shouldUpdate;
 export const selectGuitarItem = createSelector(
   [selectGuitars, selectGuitarId],
   (selectGuitars, selectGuitarId) => selectGuitars.slice().filter(({id}) => id === selectGuitarId)[0])

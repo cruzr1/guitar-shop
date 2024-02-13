@@ -120,7 +120,6 @@ export const removeGuitarFormAction = createAsyncThunk<void, string, {
   async (guitarId, {dispatch, extra: axiosApi}) => {
     try {
       await axiosApi.delete<void>(generatePath(APIPath.GuitarId, {guitarId}));
-      dispatch(removeGuitar(guitarId));
     } catch (message) {
       dispatch(clearErrorAction(`${ErrorMessage.FailedDeleteGuitarForm}: ${message}`));
 

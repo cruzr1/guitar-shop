@@ -10,6 +10,7 @@ export type GuitarsStateType = {
   totalPages: number;
   guitarsLoadingStatus: RequestStatusType;
   hasDataError: boolean;
+  shouldUpdate: boolean;
 }
 
 const guitarsState: GuitarsStateType = {
@@ -17,7 +18,8 @@ const guitarsState: GuitarsStateType = {
   currentPage: DEFAULT_PAGE_NUMBER,
   totalPages: DEFAULT_PAGE_NUMBER,
   guitarsLoadingStatus: RequestStatus.Idle,
-  hasDataError: false
+  hasDataError: false,
+  shouldUpdate: false,
 };
 
 export const guitars = createSlice({
@@ -33,21 +35,22 @@ export const guitars = createSlice({
     updateTotalPagesNumber: (state, {payload}: PayloadAction<number>) => {
       state.totalPages = payload;
     },
+    updateGuitarList: (state, {payload}: PayloadAction<boolean>) => {
+      state.shouldUpdate = payload;
+    },
     addGuitar: (state, {payload}: PayloadAction<GuitarType>) => {
       state.guitars.push(payload);
     },
     updateGuitar: (state, {payload}: PayloadAction<GuitarType>) => {
       state.guitars.splice(state.guitars.findIndex(({id: guitarId}) => guitarId === payload.id), 1, payload);
     },
-    removeGuitar: (state, {payload}: PayloadAction<string>) => {
-      state.guitars = state.guitars.filter((guitar) => guitar.id !== payload);
-    }
   },
   extraReducers(builder) {
     builder
       .addCase(loadGuitarsAction.pending, (state) => {
         state.guitarsLoadingStatus = RequestStatus.Pending;
         state.hasDataError = false;
+        state.shouldUpdate = false;
       })
       .addCase(loadGuitarsAction.fulfilled, (state) => {
         state.guitarsLoadingStatus = RequestStatus.Fulfilled;
@@ -77,5 +80,5 @@ export const {
   updateTotalPagesNumber,
   addGuitar,
   updateGuitar,
-  removeGuitar
+  updateGuitarList
 } = guitars.actions;

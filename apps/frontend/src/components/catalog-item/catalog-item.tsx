@@ -2,6 +2,12 @@ import { Link, generatePath } from 'react-router-dom';
 import dayjs from 'dayjs'
 import { AppRoute, GuitarNames } from '../../const';
 import { GuitarCategoryType, StringsCountType } from '../../types';
+import { useAppDispatch } from '../../hooks/hooks';
+import { removeGuitarFormAction } from '../../store/api-actions';
+import { } from '../../store/guitars/guitars.selectors';
+import { updateGuitarList } from '../../store/guitars/guitars.slice';
+
+
 
 export type CatalogItemProps = {
   id: string;
@@ -16,8 +22,13 @@ export type CatalogItemProps = {
 }
 
 export default function CatalogItem ({id, name, createdAt, imageURL, type, price}: CatalogItemProps):JSX.Element {
+  const dispatch = useAppDispatch();
   const itemPath = generatePath(AppRoute.ProductId, {productId: id})
   const createdDate = dayjs(createdAt).format('DD.MM.YYYY');
+  const handleDeleteClick = () => {
+    dispatch(removeGuitarFormAction(id));
+    dispatch(updateGuitarList(true))
+  }
   return (
     <>
       <div className="catalog-item__data"><img src={imageURL} width="36" height="93" alt="Картинка гитары"/>
@@ -29,7 +40,12 @@ export default function CatalogItem ({id, name, createdAt, imageURL, type, price
         </div>
       </div>
       <div className="catalog-item__buttons"><Link className="button button--small button--black-border" to={AppRoute.EditItem} aria-label="Редактировать товар">Редактировать</Link>
-        <button className="button button--small button--black-border" type="submit" aria-label="Удалить товар">Удалить</button>
+        <button
+          className="button button--small button--black-border"
+          type="submit"
+          onClick={() => handleDeleteClick()}
+          aria-label="Удалить товар"
+        >Удалить</button>
       </div>
     </>
   )
