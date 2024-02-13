@@ -1,11 +1,18 @@
-import { GUITARS } from '../../mocks/guitars.mocks'
-import { GuitarCategory } from '../../const';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import classNames from 'classnames';
+import { GuitarNames } from '../../const';
+import { GuitarCategoryType, StringsCountType } from '../../types';
 
-export default function Tabs (): JSX.Element {
-  const product = GUITARS[0];
+type TabsProps = {
+  article: string,
+  type: GuitarCategoryType,
+  stringsCount: StringsCountType,
+  description: string
+}
+
+export default function Tabs ({article, type, stringsCount, description}: TabsProps): JSX.Element {
+
   const [isSummary, setSummary] = useState<boolean>(true);
   return (
     <div className="tabs">
@@ -23,18 +30,18 @@ export default function Tabs (): JSX.Element {
         <table className={classNames('tabs__table', {'hidden': !isSummary})}>
           <tr className="tabs__table-row">
             <td className="tabs__title">Артикул:</td>
-            <td className="tabs__value">{product.article}</td>
+            <td className="tabs__value">{article}</td>
           </tr>
           <tr className="tabs__table-row">
             <td className="tabs__title">Тип:</td>
-            <td className="tabs__value">{GuitarCategory[product.type].name}</td>
+            <td className="tabs__value">{GuitarNames[type]}</td>
           </tr>
           <tr className="tabs__table-row">
             <td className="tabs__title">Количество струн:</td>
-            <td className="tabs__value">{product.stringsCount} струнная</td>
+            <td className="tabs__value">{stringsCount} струнная</td>
           </tr>
         </table>
-        <p className={classNames('tabs__product-description', {'hidden': isSummary})}>{product.description}</p>
+        <p className={classNames('tabs__product-description', {'hidden': isSummary})}>{description}</p>
       </div>
     </div>
   )

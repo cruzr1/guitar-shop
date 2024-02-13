@@ -1,5 +1,6 @@
-import { StateType } from '../../types';
+import { GuitarType, StateType } from '../../types';
 import { NameSpace } from '../../const';
+import { createSelector } from '@reduxjs/toolkit';
 
 export const selectGuitarDetailsLoadingStatus = (state: StateType) => state[NameSpace.GuitarForm].guitarFormLoadingStatus;
 export const selectGuitarDetailsLoadingErrorStatus = (state: StateType) => state[NameSpace.GuitarForm].hasGuitarFormError;
@@ -12,3 +13,37 @@ export const selectGuitarCategoryType = (state: StateType) => state[NameSpace.Gu
 export const selectGuitarStringsCount = (state: StateType) => state[NameSpace.GuitarForm].stringsCount;
 export const selectGuitarArticle = (state: StateType) => state[NameSpace.GuitarForm].article;
 export const selectGuitarPrice = (state: StateType) => state[NameSpace.GuitarForm].price;
+export const selectGuitarFormError = (state: StateType) => state[NameSpace.GuitarForm].hasGuitarFormError;
+export const selectGuitarForm = createSelector(
+  [
+    selectGuitarId,
+    selectGuitarArticle,
+    selectGuitarCategoryType,
+    selectGuitarCreatedDate,
+    selectGuitarDescription,
+    selectGuitarImageURL,
+    selectGuitarName,
+    selectGuitarPrice,
+    selectGuitarStringsCount
+  ], (
+    selectGuitarId,
+    selectGuitarArticle,
+    selectGuitarCategoryType,
+    selectGuitarCreatedDate,
+    selectGuitarDescription,
+    selectGuitarImageURL,
+    selectGuitarName,
+    selectGuitarPrice,
+    selectGuitarStringsCount
+  ): GuitarType => ({
+    id: selectGuitarId,
+    name: selectGuitarName,
+    description: selectGuitarDescription,
+    createdAt: selectGuitarCreatedDate,
+    imageURL: selectGuitarImageURL,
+    type: selectGuitarCategoryType,
+    stringsCount: selectGuitarStringsCount,
+    article: selectGuitarArticle,
+    price: selectGuitarPrice,
+  })
+)

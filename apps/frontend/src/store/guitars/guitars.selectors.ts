@@ -11,8 +11,7 @@ export const selectGuitarsLoadingStatus = (state: StateType) => state[NameSpace.
 export const selectGuitarsLoadingErrorStatus = (state: StateType) => state[NameSpace.Guitars].hasDataError;
 export const selectGuitarItem = createSelector(
   [selectGuitars, selectGuitarId],
-  (selectGuitars, selectGuitarId) => selectGuitars.filter(({id}) => id === selectGuitarId)[0]
-)
+  (selectGuitars, selectGuitarId) => selectGuitars.slice().filter(({id}) => id === selectGuitarId)[0])
 export const selectGuitarsSorted = createSelector(
   [selectGuitars, selectActiveSortField, selectActiveSortOrder],
   (selectGuitars, selectActiveSortField, selectActiveSortOrder) => {

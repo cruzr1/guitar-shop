@@ -36,8 +36,8 @@ export class GuitarController {
   @UseGuards(CheckAuthGuard)
   @Get('/')
   public async index(@Query() query?: GuitarsRawQuery): Promise<EntitiesWithPaginationRdo<GuitarRdo>> {
-    const newQuery: IndexGuitarsQuery = adaptDataToService(query);
-    const guitarsWithPagination = await this.guitarService.indexGuitars(newQuery);
+    const adaptedQuery: IndexGuitarsQuery = adaptDataToService(query);
+    const guitarsWithPagination = await this.guitarService.indexGuitars(adaptedQuery);
     return {
       ...guitarsWithPagination,
       entities: guitarsWithPagination.entities.map((guitar) => fillDTO(GuitarRdo, guitar.toPOJO()))

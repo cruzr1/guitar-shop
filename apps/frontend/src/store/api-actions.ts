@@ -3,6 +3,7 @@ import { generatePath } from 'react-router-dom';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import {EntitiesWithPaginationRdo} from '@guitar-shop/types';
 import { addGuitar, loadGuitars, removeGuitar, updateCurrentPageNumber, updateGuitar, updateTotalPagesNumber } from './guitars/guitars.slice';
+import { fillGuitarFormData } from './guitar-form/guitar-form.slice';
 import { setError } from './error/error.slice';
 import { updateAuthStatus, setEmail } from './user/user.slice';
 import { setToken} from '../services/token';
@@ -45,6 +46,25 @@ export const loadGuitarsAction = createAsyncThunk<void | undefined, GuitarsQuery
       dispatch(updateTotalPagesNumber(totalPages));
     } catch (message) {
       dispatch(clearErrorAction(`${ErrorMessage.FailedLoadGuitars}: ${message}`));
+
+    }
+  },
+);
+
+export const getGuitarFormAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatchType;
+  state: StateType;
+  extra: AxiosInstance;
+  }
+>
+(
+  `${NameSpace.GuitarForm}/${Action.Get}`,
+  async (guitarId, {dispatch, extra: axiosApi}) => {
+    try {
+      const {data} = await axiosApi.get<GuitarType>(generatePath(APIPath.GuitarId, {guitarId}));
+      dispatch(fillGuitarFormData(data));
+    } catch (message) {
+      dispatch(clearErrorAction(`${ErrorMessage.FailedDeleteGuitarForm}: ${message}`));
 
     }
   },
