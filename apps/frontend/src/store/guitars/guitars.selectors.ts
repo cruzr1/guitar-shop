@@ -17,7 +17,7 @@ export const selectGuitarsSorted = createSelector(
   [selectGuitars, selectActiveSortField, selectActiveSortOrder],
   (selectGuitars, selectActiveSortField, selectActiveSortOrder) => {
     return selectGuitars.slice().sort((a, b) => {
-      const sortOperation = selectActiveSortOrder === 'asc' ? -1 : 1;
+      const sortOperation = selectActiveSortOrder === 'asc' ? 1 : -1;
       if (selectActiveSortField === 'createdAt') {
         return a.createdAt > b.createdAt ? sortOperation : -sortOperation;
       }

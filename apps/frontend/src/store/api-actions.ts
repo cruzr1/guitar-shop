@@ -37,7 +37,6 @@ export const loadGuitarsAction = createAsyncThunk<void | undefined, GuitarsQuery
   `${NameSpace.Guitars}/${Action.Get}`,
   async (query, {dispatch, extra: axiosApi}) => {
     try {
-      console.log(adaptGuitarsQueryToServer(query));
       const {data: {entities, totalPages, currentPage}} = await axiosApi.get<EntitiesWithPaginationRdo<GuitarType>>(APIPath.Guitars, {
         params : {...adaptGuitarsQueryToServer(query)}
       });

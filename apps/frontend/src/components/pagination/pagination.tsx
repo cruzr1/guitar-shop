@@ -10,14 +10,13 @@ export default function Pagination ():JSX.Element {
   const dispatch = useAppDispatch();
   const totalPages = useAppSelector(selectTotalPagesNumber);
   const currentPage = useAppSelector(selectCurrentPageNumber);
-  const lastPage = Math.min(currentPage + PaginationParams.PageCount, totalPages);
-  const firstPage = lastPage < PaginationParams.LastPageMinimum ? PaginationParams.FirstPageMinimum: Math.min(currentPage, lastPage - PaginationParams.PageCount);
-  const isNextDisplay = totalPages > PaginationParams.PageCount;
-  // const queryParams = useAppSelector(selectQueryParams)
-  const hanleNextCLick = () => {
-    if (currentPage < totalPages) {
-      dispatch(updateCurrentPageNumber(currentPage + DEFAULT_PAGE_NUMBER));
-    }
+  const firstPage = Math.max(currentPage - DEFAULT_PAGE_NUMBER, DEFAULT_PAGE_NUMBER);
+  const lastPage = Math.min(currentPage + DEFAULT_PAGE_NUMBER, totalPages)
+  const isNextDisplay = totalPages > currentPage;
+  const isBackDisplay = currentPage > DEFAULT_PAGE_NUMBER;
+  const hanlePageCLick = (val: number) => {
+    const newPage = val >= DEFAULT_PAGE_NUMBER && val <= totalPages ? val : currentPage;
+    dispatch(updateCurrentPageNumber(newPage));
   }
   const pageNumbers = [];
   for (let i = firstPage; i <= lastPage; i++) {
@@ -26,8 +25,22 @@ export default function Pagination ():JSX.Element {
   return (
     <div className="pagination product-list__pagination">
       <ul className="pagination__list">
+      {isBackDisplay &&
+          <li className="pagination__page pagination__page--next" id="back">
+            <Link
+                className="link pagination__page-link"
+                to='#'
+                onClick={() => hanlePageCLick(currentPage - DEFAULT_PAGE_NUMBER)}
+              >Назад</Link>
+          </li>
+        }
         {pageNumbers.map((val) => (
-          <li key={val} className={classNames('pagination__page', {'pagination__page--active': val === currentPage})}><Link className="link pagination__page-link" to='#'>{val}</Link>
+          <li key={val} className={classNames('pagination__page', {'pagination__page--active': val === currentPage})}>
+            <Link
+              className="link pagination__page-link"
+              onClick={() => hanlePageCLick(val)}
+              to='#'
+            >{val}</Link>
           </li>
         ))}
         {isNextDisplay &&
@@ -35,7 +48,7 @@ export default function Pagination ():JSX.Element {
             <Link
                 className="link pagination__page-link"
                 to='#'
-                onClick={() => hanleNextCLick()}
+                onClick={() => hanlePageCLick(currentPage + DEFAULT_PAGE_NUMBER)}
               >Далее</Link>
           </li>
         }

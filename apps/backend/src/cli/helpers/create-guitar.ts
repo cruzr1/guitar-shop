@@ -1,6 +1,5 @@
-import { generateRandomValue, getRandomItem } from './common';
-import { Guitar, GuitarCategoryType, MockGuitarDataType, StringsCountType } from '@guitar-shop/types';
-import { GuitarCategory, GuitarValidationParams, STRINGS } from '../../../../../libs/shared/types/src/lib/query/guitar.constant';
+import { generateRandomDate, generateRandomValue, getRandomItem } from './common';
+import { Guitar, GuitarCategoryType, MockGuitarDataType, StringsCountType, GuitarCategory, GuitarValidationParams, STRINGS } from '../types';
 import { randomUUID } from 'crypto';
 
 export function generateGuitar(mockGuitarData: MockGuitarDataType):Guitar {
@@ -8,7 +7,7 @@ export function generateGuitar(mockGuitarData: MockGuitarDataType):Guitar {
   const description = getRandomItem<string>(mockGuitarData.descriptions);
   const imageURL = getRandomItem<string>(mockGuitarData.imageURLs);
   const type = getRandomItem<GuitarCategoryType>(Object.values(GuitarCategory));
-  const createdAt = new Date();
+  const createdAt = generateRandomDate();
   const article = randomUUID().slice(
     GuitarValidationParams.Article.Length.Minimum - 1,
     GuitarValidationParams.Article.Length.Maximum

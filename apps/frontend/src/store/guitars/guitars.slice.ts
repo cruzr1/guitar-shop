@@ -2,6 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { loadGuitarsAction } from '../api-actions';
 import { NameSpace, RequestStatus, DEFAULT_PAGE_NUMBER } from '../../const';
 import { GuitarType, RequestStatusType } from '../../types'
+import { updateGuitarTypeFilter, updateSortField, updateSortOrder, updateStringsCountFilter } from '../guitar-list/guitar-list.slice';
 
 export type GuitarsStateType = {
   guitars: GuitarType[];
@@ -54,6 +55,18 @@ export const guitars = createSlice({
       .addCase(loadGuitarsAction.rejected, (state) => {
         state.guitarsLoadingStatus = RequestStatus.Rejected;
         state.hasDataError = true;
+      })
+      .addCase(updateSortField, (state) => {
+        state.currentPage = DEFAULT_PAGE_NUMBER;
+      })
+      .addCase(updateSortOrder, (state) => {
+        state.currentPage = DEFAULT_PAGE_NUMBER;
+      })
+      .addCase(updateGuitarTypeFilter, (state) => {
+        state.currentPage = DEFAULT_PAGE_NUMBER;
+      })
+      .addCase(updateStringsCountFilter, (state) => {
+        state.currentPage = DEFAULT_PAGE_NUMBER;
       })
   }
 })

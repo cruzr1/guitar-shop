@@ -1,4 +1,4 @@
-import { NameSpace, SortOrder, SortOrderField } from '../../const';
+import { GUITAR_CATEGORIES, GuitarCategory, NameSpace, STRINGS, SortOrder, SortOrderField } from '../../const';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { GuitarCategoryType, SortOrderFieldType, SortOrderType, StringsCountType } from '../../types';
 
@@ -10,8 +10,8 @@ export type GuitarListStateType = {
 }
 
 export const guitarListState: GuitarListStateType = {
-  guitarTypeFilter: ['electric', 'ukulele'],
-  stringsCountFilter: [4, 6],
+  guitarTypeFilter: GUITAR_CATEGORIES,
+  stringsCountFilter: STRINGS,
   activeSortOrder: SortOrder.Asc,
   activeSortField: SortOrderField.CreatedAt,
 };
@@ -35,6 +35,12 @@ export const guitarList = createSlice({
     },
     updateSortField: (state, {payload}: PayloadAction<SortOrderFieldType>) => {
       state.activeSortField = payload;
+    },
+    resetFilter: (state) => {
+    state.guitarTypeFilter = GUITAR_CATEGORIES;
+    state.stringsCountFilter = STRINGS;
+    state.activeSortOrder = SortOrder.Asc;
+    state.activeSortField = SortOrderField.CreatedAt;
     }
   },
 });
@@ -43,5 +49,6 @@ export const {
   updateGuitarTypeFilter,
   updateStringsCountFilter,
   updateSortOrder,
-  updateSortField
+  updateSortField,
+  resetFilter
 } = guitarList.actions;

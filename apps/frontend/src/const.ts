@@ -1,3 +1,6 @@
+import { StringsCountType } from './types';
+
+
 export const AppRoute = {
   Login: '/login',
   Signin: '/signin',
@@ -38,6 +41,8 @@ export const GuitarCategory = {
   },
 } as const;
 
+export const GUITAR_CATEGORIES = Object.values(GuitarCategory).map(({filterId}) => filterId);
+
 export const GuitarNames = {
   [GuitarCategory.Acoustic.filterId]: 'Акустическая гитара',
   [GuitarCategory.Electric.filterId]: 'Электрогитара',
@@ -52,7 +57,7 @@ export const PaginationParams = {
   FirstPageMinimum: 1,
 }
 
-export const STRINGS = [4, 6, 7, 12] as const;
+export const STRINGS: StringsCountType[] = [4, 6, 7, 12] as const;
 
 export const AuthStatus = {
   Auth: 'auth',
