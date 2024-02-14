@@ -6,6 +6,7 @@ import { CreateNewGuitarDto } from './dto/create-new-guitar.dto';
 import { GuitarRdo } from './rdo/guitar-rdo';
 import { fillDTO, adaptDataToService} from '@guitar-shop/helpers';
 import { IndexGuitarsQuery, EntitiesWithPaginationRdo, GuitarsRawQuery } from '@guitar-shop/types';
+import { MongoIdValidationPipe } from '../pipes/mongo-id-validation.pipe';
 import { UpdateGuitarDto } from './dto/update-guitar.dto';
 
 
@@ -33,7 +34,6 @@ export class GuitarController {
     status: HttpStatus.OK,
     description: 'The following guitars have been found.'
   })
-  @UseGuards(CheckAuthGuard)
   @Get('/')
   public async index(@Query() query?: GuitarsRawQuery): Promise<EntitiesWithPaginationRdo<GuitarRdo>> {
     const adaptedQuery: IndexGuitarsQuery = adaptDataToService(query);
@@ -48,8 +48,9 @@ export class GuitarController {
     status: HttpStatus.OK,
     description: 'The guitar details have been provided.'
   })
+  @UseGuards(CheckAuthGuard)
   @Get(':guitarId')
-  public async show(@Param('guitarId') guitarId: string): Promise<GuitarRdo> {
+  public async show(@Param('guitarId', MongoIdValidationPipe) guitarId: string): Promise<GuitarRdo> {
     const existGuitar = await this.guitarService.getGuitarEntity(guitarId);
     return fillDTO(GuitarRdo, existGuitar.toPOJO());
   }
@@ -61,7 +62,7 @@ export class GuitarController {
   @UseGuards(CheckAuthGuard)
   @Patch(':guitarId')
   public async update(
-    @Param('guitarId') guitarId: string,
+    @Param('guitarId', MongoIdValidationPipe) guitarId: string,
     @Body() dto: UpdateGuitarDto
   ): Promise<GuitarRdo> {
     const updatedGuitar = await this.guitarService.updateGuitarEntity(guitarId, dto);
@@ -76,7 +77,7 @@ export class GuitarController {
   @HttpCode(HttpStatus.NO_CONTENT)
   @Delete(':guitarId')
   public async delete(
-    @Param('guitarId') guitarId: string,
+    @Param('guitarId', MongoIdValidationPipe) guitarId: string,
   ): Promise<void> {
     await this.guitarService.deleteGuitarEntity(guitarId);
   }

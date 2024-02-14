@@ -13,21 +13,22 @@ import { getGuitarFormAction } from '../../store/api-actions';
 export default function ProductPage (): JSX.Element {
   const dispatch = useAppDispatch();
   const productId = useParams().productId as string;
-  if (!productId) {
-    dispatch(setGuitarFormError(true));
-  } else {
-    dispatch(setGuitarFormError(false));
-  }
+
   useEffect(() =>{
     let isMounted = true;
     if (isMounted) {
       dispatch(getGuitarFormAction(productId));
+      if (!productId) {
+        dispatch(setGuitarFormError(true));
+      } else {
+        dispatch(setGuitarFormError(false));
+      }
     }
     return () => {
       isMounted = false;
     };
   },[dispatch]);
-  const guitarFormError = useAppSelector(selectGuitarFormError)
+  const guitarFormError = useAppSelector(selectGuitarFormError);
   const {imageURL, name, ...restProps} = useAppSelector(selectGuitarForm);
   return (
     <>

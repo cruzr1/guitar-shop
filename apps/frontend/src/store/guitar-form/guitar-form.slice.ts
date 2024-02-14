@@ -69,7 +69,6 @@ export const guitarForm = createSlice({
       state.id = payload.id;
       state.name = payload.name;
       state.description = payload.description;
-      state.createdAt = payload.createdAt.toISOString();
       state.imageURL = payload.imageURL;
       state.type = payload.type;
       state.stringsCount = payload.stringsCount;

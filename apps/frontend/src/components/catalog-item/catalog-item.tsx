@@ -26,7 +26,7 @@ export default function CatalogItem ({id, name, createdAt, imageURL, type, price
   const createdDate = dayjs(createdAt).format('DD.MM.YYYY');
   const handleDeleteClick = () => {
     dispatch(removeGuitarFormAction(id));
-    dispatch(updateGuitarList(true))
+
   }
   const handleEditHover = () => {
     dispatch(setGuitarId(id));

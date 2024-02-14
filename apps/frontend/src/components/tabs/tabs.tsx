@@ -28,18 +28,20 @@ export default function Tabs ({article, type, stringsCount, description}: TabsPr
       >Описание</Link>
       <div className="tabs__content" id="characteristics">
         <table className={classNames('tabs__table', {'hidden': !isSummary})}>
-          <tr className="tabs__table-row">
-            <td className="tabs__title">Артикул:</td>
-            <td className="tabs__value">{article}</td>
-          </tr>
-          <tr className="tabs__table-row">
-            <td className="tabs__title">Тип:</td>
-            <td className="tabs__value">{GuitarNames[type]}</td>
-          </tr>
-          <tr className="tabs__table-row">
-            <td className="tabs__title">Количество струн:</td>
-            <td className="tabs__value">{stringsCount} струнная</td>
-          </tr>
+          <tbody>
+            <tr className="tabs__table-row">
+              <td className="tabs__title">Артикул:</td>
+              <td className="tabs__value">{article}</td>
+            </tr>
+            <tr className="tabs__table-row">
+              <td className="tabs__title">Тип:</td>
+              <td className="tabs__value">{GuitarNames[type]}</td>
+            </tr>
+            <tr className="tabs__table-row">
+              <td className="tabs__title">Количество струн:</td>
+              <td className="tabs__value">{stringsCount} струнная</td>
+            </tr>
+          </tbody>
         </table>
         <p className={classNames('tabs__product-description', {'hidden': isSummary})}>{description}</p>
       </div>

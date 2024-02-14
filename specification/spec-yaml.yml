@@ -1,0 +1,313 @@
+openapi: 3.0.0
+paths:
+  /api/user/signin:
+    post:
+      operationId: UserController_create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserDto'
+      responses:
+        '201':
+          description: The new user has been created.
+      tags:
+        - user
+  /api/user/login:
+    post:
+      operationId: UserController_login
+      parameters: []
+      responses:
+        '200':
+          description: User has been successfully logged in.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoggedUserRdo'
+        '401':
+          description: Password of login is wrong.
+      tags:
+        - user
+  /api/user/refresh:
+    post:
+      operationId: UserController_refreshToken
+      parameters: []
+      responses:
+        '200':
+          description: Get a new pair of JWT Tokens
+      tags:
+        - user
+  /api/user/check:
+    post:
+      operationId: UserController_checkToken
+      parameters: []
+      responses:
+        '200':
+          description: Checks if the token payload exists
+      tags:
+        - user
+  /api/user/{id}:
+    get:
+      operationId: UserController_showById
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserRdo'
+      tags:
+        - user
+  /api/guitar:
+    post:
+      operationId: GuitarController_create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateNewGuitarDto'
+      responses:
+        '201':
+          description: The new guitar has been created.
+      tags:
+        - guitar
+    get:
+      operationId: GuitarController_index
+      parameters:
+        - name: type
+          required: true
+          in: query
+          description: Guitar type
+          example: electric
+          schema:
+            type: string
+        - name: stringsCount
+          required: true
+          in: query
+          description: Guitar strings count
+          example: '4'
+          schema:
+            type: string
+        - name: page
+          required: true
+          in: query
+          description: Page number
+          example: '2'
+          schema:
+            type: number
+      responses:
+        '200':
+          description: The following guitars have been found.
+      tags:
+        - guitar
+  /api/guitar/{guitarId}:
+    get:
+      operationId: GuitarController_show
+      parameters:
+        - name: guitarId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The guitar details have been provided.
+      tags:
+        - guitar
+    patch:
+      operationId: GuitarController_update
+      parameters:
+        - name: guitarId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateGuitarDto'
+      responses:
+        '200':
+          description: The guitar has been updated.
+      tags:
+        - guitar
+    delete:
+      operationId: GuitarController_delete
+      parameters:
+        - name: guitarId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '204':
+          description: The guitar has been deleted.
+      tags:
+        - guitar
+info:
+  title: The "User" service
+  description: User service API
+  version: '1.0'
+  contact: {}
+tags: []
+servers: []
+components:
+  schemas:
+    CreateUserDto:
+      type: object
+      properties:
+        email:
+          type: string
+          description: User unique email address
+          example: user@user.com
+        name:
+          type: string
+          description: User first name
+          example: Alex
+        password:
+          type: string
+          description: User password
+          example: '123456'
+      required:
+        - email
+        - name
+        - password
+    LoggedUserRdo:
+      type: object
+      properties:
+        id:
+          type: string
+          description: User unique ID
+          example: 1234-5678-9012-3456
+        email:
+          type: string
+          description: User unique email address
+          example: user@user.com
+        accessToken:
+          type: string
+          description: Access token
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+        refreshToken:
+          type: string
+          description: Refresh token
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+      required:
+        - id
+        - email
+        - accessToken
+        - refreshToken
+    UserRdo:
+      type: object
+      properties:
+        id:
+          type: string
+          description: User unique ID
+          example: 1234-5678-9012-3456
+        email:
+          type: string
+          description: User unique email address
+          example: user@user.com
+        name:
+          type: string
+          description: User name
+          example: Alex
+      required:
+        - id
+        - email
+        - name
+    CreateNewGuitarDto:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The guitar name
+          example: Cruz 231X
+        description:
+          type: string
+          description: The guitar descrtiption
+          example: The brand new guitar on a market
+        imageURL:
+          type: string
+          description: The URL to guitar image
+          example: /pictures/guitar.jpg
+        type:
+          type: object
+          description: The guitar category type
+          example: electric
+        article:
+          type: string
+          description: The guitar article
+          example: er234jlj34
+        price:
+          type: number
+          description: The guitar price
+          example: '12345'
+        stringsCount:
+          type: object
+          description: The guitar strings count
+          example: '4'
+      required:
+        - name
+        - description
+        - imageURL
+        - type
+        - article
+        - price
+        - stringsCount
+    UpdateGuitarDto:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The guitar name
+          example: Cruz 231X
+        description:
+          type: string
+          description: The guitar descrtiption
+          example: The brand new guitar on a market
+        imageURL:
+          type: string
+          description: The URL to guitar image
+          example: /pictures/guitar.jpg
+        createdAt:
+          format: date-time
+          type: string
+          description: The guitar category type
+          example: electric
+        type:
+          type: object
+          description: The guitar category type
+          example: electric
+        article:
+          type: string
+          description: The guitar article
+          example: er234jlj34
+        price:
+          type: number
+          description: The guitar price
+          example: '12345'
+        stringsCount:
+          type: object
+          description: The guitar strings count
+          example: '4'
+      required:
+        - name
+        - description
+        - imageURL
+        - createdAt
+        - type
+        - article
+        - price
+        - stringsCount

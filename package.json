@@ -3,11 +3,11 @@
   "version": "4.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "vite",
-    "build": "tsc && vite build",
+    "backend": "nx run backend:serve:production",
+    "frontend": "nx run frontend:serve:production",
+    "build:backend": "nx run backend:build",
+    "build:frontend": "nx run forntend:build",
     "lint": "eslint --ext ts,tsx",
-    "preview": "vite preview",
-    "test": "vitest --passWithNoTests",
     "cli": "ts-node apps/backend/src/main.cli.ts"
   },
   "private": true,
