@@ -7,7 +7,7 @@ export type GuitarFormStateType = {
   id: string;
   name: string;
   description: string;
-  createdAt: Date;
+  createdAt: string;
   imageURL: string;
   type: GuitarCategoryType;
   stringsCount: StringsCountType
@@ -21,7 +21,7 @@ const guitarFormState: GuitarFormStateType = {
   id: '',
   name: '',
   description: '',
-  createdAt: new Date(),
+  createdAt: '',
   imageURL: '',
   type: GuitarCategory.Electric.filterId,
   stringsCount: STRINGS[0],
@@ -44,7 +44,7 @@ export const guitarForm = createSlice({
     setDescription: (state, {payload}: PayloadAction<string>) => {
       state.description = payload;
     },
-    setCreatedDate: (state, {payload}: PayloadAction<Date>) => {
+    setCreatedDate: (state, {payload}: PayloadAction<string>) => {
       state.createdAt = payload;
     },
     setImageURL: (state, {payload}: PayloadAction<string>) => {
@@ -69,7 +69,7 @@ export const guitarForm = createSlice({
       state.id = payload.id;
       state.name = payload.name;
       state.description = payload.description;
-      state.createdAt = payload.createdAt;
+      state.createdAt = payload.createdAt.toISOString();
       state.imageURL = payload.imageURL;
       state.type = payload.type;
       state.stringsCount = payload.stringsCount;
@@ -82,7 +82,7 @@ export const guitarForm = createSlice({
       state.id = '';
       state.name = '';
       state.description = '';
-      state.createdAt =  new Date();
+      state.createdAt = '';
       state.imageURL = '';
       state.type = GuitarCategory.Electric.filterId;
       state.stringsCount = STRINGS[0];

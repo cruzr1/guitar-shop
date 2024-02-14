@@ -1,7 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsArray, Matches, IsIn, Length, Min, Max, IsOptional } from 'class-validator';
+import { IsString, Matches, IsIn, Length, Min, Max, IsOptional, IsDate } from 'class-validator';
+import { Type } from 'class-transformer';
 import { GuitarCategoryType, StringsCountType } from '@guitar-shop/types';
-import { GuitarCategory, STRINGS, GuitarValidationParams } from '../../../../../../libs/shared/types/src/lib/query/guitar.constant';
+import { GuitarCategory, STRINGS, GuitarValidationParams } from '@guitar-shop/types';
 
 export class UpdateGuitarDto {
   @ApiProperty({
@@ -38,12 +39,22 @@ export class UpdateGuitarDto {
   @IsString()
   public imageURL: string;
 
+
   @ApiProperty({
     description: 'The guitar category type',
     example: 'electric'
   })
   @IsOptional()
-  @IsArray()
+  @Type(() => Date)
+  @IsDate()
+  public createdAt: Date;
+
+
+  @ApiProperty({
+    description: 'The guitar category type',
+    example: 'electric'
+  })
+  @IsOptional()
   @IsIn(Object.values(GuitarCategory), {each: true})
   public type: GuitarCategoryType;
 
@@ -73,7 +84,6 @@ export class UpdateGuitarDto {
     example: '4'
   })
   @IsOptional()
-  @IsArray()
   @IsIn(STRINGS, {each: true})
   public stringsCount: StringsCountType
 }

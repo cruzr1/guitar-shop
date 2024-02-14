@@ -1,4 +1,4 @@
-import { StringsCountType } from './types';
+import { GuitarCategoryType, GuitarType, StringsCountType } from './types';
 
 
 export const AppRoute = {
@@ -43,7 +43,7 @@ export const GuitarCategory = {
 
 export const GUITAR_CATEGORIES = Object.values(GuitarCategory).map(({filterId}) => filterId);
 
-export const GuitarNames = {
+export const GuitarNames: Record<GuitarCategoryType, string> = {
   [GuitarCategory.Acoustic.filterId]: 'Акустическая гитара',
   [GuitarCategory.Electric.filterId]: 'Электрогитара',
   [GuitarCategory.Ukulele.filterId]: 'Укулеле',
@@ -143,3 +143,15 @@ export const SortOrderField = {
   Price: 'price',
   CreatedAt: 'createdAt'
 } as const;
+
+export const EmptyItem: GuitarType = {
+  id: '',
+  name: '',
+  description: '',
+  createdAt: new Date(),
+  imageURL: '',
+  type: GuitarCategory.Electric.filterId,
+  article: '',
+  price: 0,
+  stringsCount: STRINGS[0]
+}

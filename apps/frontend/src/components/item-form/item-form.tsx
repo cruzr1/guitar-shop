@@ -1,6 +1,14 @@
 import { useNavigate } from 'react-router-dom';
-import { AppRoute, GuitarCategory, STRINGS } from '../../const';
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { AppRoute, GuitarNames, STRINGS, EmptyItem } from '../../const';
 import Breadcrumbs from '../breadcrumbs/breadcrumbs'
+import { selectGuitarItem } from '../../store/guitars/guitars.selectors';
+import { GuitarCategoryType } from '../../types';
+import { useState } from 'react';
+import { StringsCountType } from '@guitar-shop/types';
+import { postGuitarFormAction, updateGuitarFormAction } from '../../store/api-actions';
 
 type ItemFormProps = {
   isAddForm?: boolean,
@@ -8,14 +16,45 @@ type ItemFormProps = {
 
 export default function ItemForm ({isAddForm}: ItemFormProps):JSX.Element {
   const classPrefix = isAddForm ? 'add' : 'edit';
-  const name = 'ZX Spectrum';
-  const createdAt = '08.02.2024';
-  const article ='CLSU3455678';
-  const description = ' Plucked stringed instrument. It normally has six strings, a fretted fingerboard, and a soundbox with a pronounced waist. It probably originated in Spain in the early 16th century. By 1800 it was being strung with six single strings; 19th-century innovations gave it its modern form.'
-  const price = 27000;
-  const guitarTypes = Object.values(GuitarCategory)
+  const dispatch = useAppDispatch();
+  const item = isAddForm ? EmptyItem : useAppSelector(selectGuitarItem);
+  const [type, setType] = useState<GuitarCategoryType>(item.type);
+  const [stringsCount, setStringsCount] = useState<StringsCountType>(item.stringsCount);
+  const [name, setName] = useState<string>(item.name);
+  const [createdAt, setCreatedAt] = useState<Date | null>(new Date(item.createdAt));
+  const [price, setPrice] = useState<number | string>(item.price);
+  const [article, setArticle] = useState<string>(item.article);
+  const [description, setDescription] = useState<string>(item.description);
   const RequiredFieldComment = ():JSX.Element => <p>Заполните поле</p>;
   const navigate = useNavigate();
+  const handleFormSubmit = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    evt.preventDefault();
+    if (isAddForm) {
+      dispatch(postGuitarFormAction({
+        name,
+        description,
+        imageURL: item.imageURL,
+        type,
+        article,
+        price: Number(price),
+        stringsCount
+      }))
+      navigate(AppRoute.Products);
+    } else {
+      dispatch(updateGuitarFormAction({
+        id: item.id,
+        createdAt: createdAt as Date,
+        name,
+        description,
+        imageURL: item.imageURL,
+        type,
+        article,
+        price: Number(price),
+        stringsCount
+      }))
+      navigate(AppRoute.Products);
+    }
+  }
   return (
     <section className={`${classPrefix}-item`}>
       <div className="container">
@@ -25,18 +64,28 @@ export default function ItemForm ({isAddForm}: ItemFormProps):JSX.Element {
           <div className={`${classPrefix}-item__form-left`}>
             <div className={`edit-item-image ${classPrefix}-item__form-image`}>
               <div className="edit-item-image__image-wrap">
-                {!isAddForm && <img className="edit-item-image__image" src="img/content/add-item-1.png" srcSet="img/content/add-item-1@2x.png 2x" width="133" height="332" alt={isAddForm ? "" : name}/>}
+                {!isAddForm && <img className="edit-item-image__image" src="img/content/add-item-1.png" srcSet="img/content/add-item-1@2x.png 2x" width="133" height="332" alt={name}/>}
               </div>
               <div className="edit-item-image__btn-wrap">
-                <button className="button button--small button--black-border edit-item-image__btn">Добавить
+                <button
+                  className="button button--small button--black-border edit-item-image__btn"
+                >Добавить
                 </button>
                 <button className="button button--small button--black-border edit-item-image__btn">Удалить</button>
               </div>
             </div>
             <div className={`input-radio ${classPrefix}-item__form-radio`}><span>{isAddForm ? 'Выберите тип товара' : 'Тип товара'}</span>
-              {guitarTypes.map(({name, id}) => (
+              {Object.entries(GuitarNames).map(([id, name]) => (
                 <>
-                  <input type="radio" id={id} name="item-type" value={id} checked={id==='el-guitar'} key={id} />
+                  <input
+                    type="radio"
+                    id={id}
+                    name="item-type"
+                    value={id}
+                    onChange={() => setType(id as GuitarCategoryType)}
+                    checked={id===type}
+                    key={id}
+                  />
                   <label htmlFor={id}>{name}</label>
                 </>
               ))}
@@ -44,7 +93,15 @@ export default function ItemForm ({isAddForm}: ItemFormProps):JSX.Element {
             <div className={`input-radio ${classPrefix}-item__form-radio`}><span>Количество струн</span>
               {STRINGS.map((num) => (
                 <>
-                  <input type="radio" id={`string-qty-${num}`} name="string-qty" value={num} checked={num === 4} key={num} />
+                  <input
+                    type="radio"
+                    id={`string-qty-${num}`}
+                    name="string-qty"
+                    value={num}
+                    onChange={() => setStringsCount(num)}
+                    checked={num === stringsCount}
+                    key={num}
+                  />
                   <label htmlFor={`string-qty-${num}`}>{num}</label>
                 </>
               ))}
@@ -53,37 +110,69 @@ export default function ItemForm ({isAddForm}: ItemFormProps):JSX.Element {
           <div className={`${classPrefix}-item__form-right`}>
             <div className={`custom-input ${classPrefix}-item__form-input`}>
               <label><span>Дата добавления товара</span>
-                <input type="text" name="date" value={isAddForm ? "" : createdAt} placeholder="Дата в формате 00.00.0000" readOnly />
+
+                <DatePicker
+                  selected={createdAt}
+                  onChange={(date) => setCreatedAt(date)}
+                  dateFormat='dd.MM.YYYY'
+                />
               </label>
               <RequiredFieldComment />
             </div>
             <div className={`custom-input ${classPrefix}-item__form-input`}>
               <label><span>{isAddForm ? 'Введите наименование товара' : 'Наименование товара'}</span>
-                <input type="text" name="title" value={isAddForm ? "" : name} placeholder="Наименование"/>
+                <input
+                  type="text"
+                  name="title"
+                  value={name}
+                  onChange={(evt) => setName(evt.target.value)}
+                  placeholder="Наименование"
+                />
               </label>
               <RequiredFieldComment />
             </div>
             <div className={`custom-input ${classPrefix}-item__form-input ${classPrefix}-item__form-input--price ${isAddForm && 'is-placeholder'}`}>
               <label><span>{isAddForm ? 'Введите цену товара' : 'Цена товара'}</span>
-                <input type="text" name="price" value={isAddForm ? "" : price} placeholder="Цена в формате 00 000"/>
+                <input
+                  type="text"
+                  name="price"
+                  value={price}
+                  onChange={(evt) => setPrice(evt.target.value.replace(/[^0-9]/gm,''))}
+                  onBlur={(evt) =>setPrice(parseInt(evt.target.value, 10) || 0)}
+                  placeholder="Цена в формате 00 000"
+                />
               </label>
               <RequiredFieldComment />
             </div>
             <div className={`custom-input ${classPrefix}-item__form-input`}>
               <label><span>{isAddForm ? 'Введите артикул товара' : 'Артикул товара'}</span>
-                <input type="text" name="sku" value={isAddForm ? "" : article} placeholder="Артикул товара"/>
+                <input
+                  type="text"
+                  name="sku"
+                  value={article}
+                  onChange={(evt) => setArticle(evt.target.value)}
+                  placeholder="Артикул товара"
+                />
               </label>
               <RequiredFieldComment />
             </div>
             <div className={`custom-textarea ${classPrefix}-item__form-textarea`}>
               <label><span>{isAddForm ? 'Введите описание товара' : 'Описание товара'}</span>
-                <textarea name="description" placeholder="">{isAddForm ? "" : description}</textarea>
+                <textarea
+                  name="description"
+                  placeholder=""
+                  value={description}
+                  onChange={(evt) => setDescription(evt.target.value)}
+                ></textarea>
               </label>
               <RequiredFieldComment />
             </div>
           </div>
           <div className={`${classPrefix}-item__form-buttons-wrap`}>
-            <button className={`button button--small ${classPrefix}-item__form-button`} type="submit">Сохранить изменения</button>
+            <button
+              className={`button button--small ${classPrefix}-item__form-button`} type="submit"
+              onClick={(evt:React.MouseEvent<HTMLButtonElement, MouseEvent>) => handleFormSubmit(evt)}
+            >Сохранить изменения</button>
             <button
               className={`button button--small ${classPrefix}-item__form-button`}
               type="button"

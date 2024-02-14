@@ -5,7 +5,7 @@ import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
 import Tabs from '../../components/tabs/tabs';
 import { adaptImage } from '../../helpers';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { setGuitarFormError, setGuitarId } from '../../store/guitar-form/guitar-form.slice';
+import { setGuitarFormError } from '../../store/guitar-form/guitar-form.slice';
 import { selectGuitarForm, selectGuitarFormError } from '../../store/guitar-form/guitar-form.selectors';
 import ErrorMessage from '../../components/error-message/error-message';
 import { getGuitarFormAction } from '../../store/api-actions';

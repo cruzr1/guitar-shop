@@ -39,7 +39,7 @@ export const selectGuitarForm = createSelector(
     id: selectGuitarId,
     name: selectGuitarName,
     description: selectGuitarDescription,
-    createdAt: selectGuitarCreatedDate,
+    createdAt: new Date(selectGuitarCreatedDate),
     imageURL: selectGuitarImageURL,
     type: selectGuitarCategoryType,
     stringsCount: selectGuitarStringsCount,

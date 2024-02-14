@@ -4,9 +4,8 @@ import { AppRoute, GuitarNames } from '../../const';
 import { GuitarCategoryType, StringsCountType } from '../../types';
 import { useAppDispatch } from '../../hooks/hooks';
 import { removeGuitarFormAction } from '../../store/api-actions';
-import { } from '../../store/guitars/guitars.selectors';
 import { updateGuitarList } from '../../store/guitars/guitars.slice';
-
+import { setGuitarId } from '../../store/guitar-form/guitar-form.slice';
 
 
 export type CatalogItemProps = {
@@ -29,6 +28,12 @@ export default function CatalogItem ({id, name, createdAt, imageURL, type, price
     dispatch(removeGuitarFormAction(id));
     dispatch(updateGuitarList(true))
   }
+  const handleEditHover = () => {
+    dispatch(setGuitarId(id));
+  }
+  const handleEditLeave = () => {
+    dispatch(setGuitarId(''));
+  }
   return (
     <>
       <div className="catalog-item__data"><img src={imageURL} width="36" height="93" alt="Картинка гитары"/>
@@ -39,7 +44,14 @@ export default function CatalogItem ({id, name, createdAt, imageURL, type, price
           <p className="catalog-item__data-price">{`${price.toLocaleString()} ₽`}</p>
         </div>
       </div>
-      <div className="catalog-item__buttons"><Link className="button button--small button--black-border" to={AppRoute.EditItem} aria-label="Редактировать товар">Редактировать</Link>
+      <div className="catalog-item__buttons">
+        <Link
+          className="button button--small button--black-border"
+          to={AppRoute.EditItem}
+          onMouseEnter={() => handleEditHover()}
+          onMouseLeave={() => handleEditLeave()}
+          aria-label="Редактировать товар"
+        >Редактировать</Link>
         <button
           className="button button--small button--black-border"
           type="submit"

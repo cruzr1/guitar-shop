@@ -38,12 +38,6 @@ export const guitars = createSlice({
     updateGuitarList: (state, {payload}: PayloadAction<boolean>) => {
       state.shouldUpdate = payload;
     },
-    addGuitar: (state, {payload}: PayloadAction<GuitarType>) => {
-      state.guitars.push(payload);
-    },
-    updateGuitar: (state, {payload}: PayloadAction<GuitarType>) => {
-      state.guitars.splice(state.guitars.findIndex(({id: guitarId}) => guitarId === payload.id), 1, payload);
-    },
   },
   extraReducers(builder) {
     builder
@@ -78,7 +72,5 @@ export const {
   loadGuitars,
   updateCurrentPageNumber,
   updateTotalPagesNumber,
-  addGuitar,
-  updateGuitar,
   updateGuitarList
 } = guitars.actions;

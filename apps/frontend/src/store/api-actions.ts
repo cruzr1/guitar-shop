@@ -2,7 +2,7 @@ import {  AxiosInstance } from 'axios';
 import { generatePath } from 'react-router-dom';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import {EntitiesWithPaginationRdo} from '@guitar-shop/types';
-import { addGuitar, loadGuitars, removeGuitar, updateCurrentPageNumber, updateGuitar, updateTotalPagesNumber } from './guitars/guitars.slice';
+import { loadGuitars, updateCurrentPageNumber, updateGuitarList, updateTotalPagesNumber } from './guitars/guitars.slice';
 import { fillGuitarFormData } from './guitar-form/guitar-form.slice';
 import { setError } from './error/error.slice';
 import { updateAuthStatus, setEmail } from './user/user.slice';
@@ -80,8 +80,8 @@ export const postGuitarFormAction = createAsyncThunk<void, NewGuitarType, {
   `${NameSpace.GuitarForm}/${Action.Create}`,
   async (guitarForm, {dispatch, extra: axiosApi}) => {
     try {
-      const {data} = await axiosApi.post<GuitarType>(APIPath.Guitars, guitarForm);
-      dispatch(addGuitar(data));
+      await axiosApi.post<GuitarType>(APIPath.Guitars, guitarForm);
+      dispatch(updateGuitarList(true))
     } catch (message) {
       dispatch(clearErrorAction(`${ErrorMessage.FailedPostGuitarForm}: ${message}`));
     }
@@ -98,11 +98,11 @@ export const updateGuitarFormAction = createAsyncThunk<void, GuitarType, {
   `${NameSpace.GuitarForm}/${Action.Update}`,
   async (guitarForm, {dispatch, extra: axiosApi}) => {
     try {
-      const {data} = await axiosApi.patch<GuitarType>(
+      await axiosApi.patch<GuitarType>(
         generatePath(APIPath.GuitarId, {guitarId: guitarForm.id}),
         guitarForm
       );
-      dispatch(updateGuitar(data));
+      dispatch(updateGuitarList(true))
     } catch (message) {
       dispatch(clearErrorAction(`${ErrorMessage.FailedUpdateGuitarForm}: ${message}`));
     }

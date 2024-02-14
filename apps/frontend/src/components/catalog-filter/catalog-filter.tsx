@@ -28,7 +28,7 @@ export default function CatalogFilter ():JSX.Element {
               className="visually-hidden"
               type="checkbox" id={category}
               name={category}
-              onClick={() => handleGuitarTypeClick(category)}
+              onChange={() => handleGuitarTypeClick(category)}
               checked={guitarTypes.includes(category)}
             />
             <label htmlFor={category}>{GuitarNames[category]}</label>
@@ -44,7 +44,7 @@ export default function CatalogFilter ():JSX.Element {
               type="checkbox"
               id={`${num}-strings`}
               name={`${num}-strings`}
-              onClick={() => handleStringsCountClick(num)}
+              onChange={() => handleStringsCountClick(num)}
               checked={stringsCount.includes(num)}
             />
             <label htmlFor={`${num}-strings`}>{num}</label>

@@ -9,7 +9,7 @@ import { IndexGuitarsQuery, EntitiesWithPaginationRdo, GuitarsRawQuery } from '@
 import { UpdateGuitarDto } from './dto/update-guitar.dto';
 
 
-@ApiTags('guitat')
+@ApiTags('guitar')
 @Controller('guitar')
 export class GuitarController {
   constructor(

@@ -38,7 +38,7 @@ export abstract class BaseMongoRepository<EntityType extends Entity<string, Docu
     if(!updatedDocument) {
       throw new NotFoundException(ENTITY_NOT_FOUND);
     }
-    return entity;
+    return this.createEntityFromDocument(updatedDocument);
   }
 
   public async deleteById(id: EntityType['id']): Promise<void> {
