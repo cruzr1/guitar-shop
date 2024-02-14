@@ -38,7 +38,7 @@ export default function Pagination ():JSX.Element {
           <li key={val} className={classNames('pagination__page', {'pagination__page--active': val === currentPage})}>
             <Link
               className="link pagination__page-link"
-              onClick={() => hanlePageCLick(val)}
+              onClick={() => handlePageCLick(val)}
               to='#'
             >{val}</Link>
           </li>
@@ -48,7 +48,7 @@ export default function Pagination ():JSX.Element {
             <Link
                 className="link pagination__page-link"
                 to='#'
-                onClick={() => hanlePageCLick(currentPage + DEFAULT_PAGE_NUMBER)}
+                onClick={() => handlePageCLick(currentPage + DEFAULT_PAGE_NUMBER)}
               >Далее</Link>
           </li>
         }
