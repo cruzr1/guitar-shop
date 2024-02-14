@@ -14,7 +14,8 @@ export default function Pagination ():JSX.Element {
   const lastPage = Math.min(currentPage + DEFAULT_PAGE_NUMBER, totalPages)
   const isNextDisplay = totalPages > currentPage;
   const isBackDisplay = currentPage > DEFAULT_PAGE_NUMBER;
-  const handlePageCLick = (val: number) => {
+  const handlePageCLick = (evt: React.MouseEvent, val: number) => {
+    evt.preventDefault();
     const newPage = val >= DEFAULT_PAGE_NUMBER && val <= totalPages ? val : currentPage;
     dispatch(updateCurrentPageNumber(newPage));
   }
@@ -30,7 +31,7 @@ export default function Pagination ():JSX.Element {
             <Link
                 className="link pagination__page-link"
                 to='#'
-                onClick={() => handlePageCLick(currentPage - DEFAULT_PAGE_NUMBER)}
+                onClick={(evt) => handlePageCLick(evt, currentPage - DEFAULT_PAGE_NUMBER)}
               >Назад</Link>
           </li>
         }
@@ -38,7 +39,7 @@ export default function Pagination ():JSX.Element {
           <li key={val} className={classNames('pagination__page', {'pagination__page--active': val === currentPage})}>
             <Link
               className="link pagination__page-link"
-              onClick={() => handlePageCLick(val)}
+              onClick={(evt) => handlePageCLick(evt, val)}
               to='#'
             >{val}</Link>
           </li>
@@ -48,7 +49,7 @@ export default function Pagination ():JSX.Element {
             <Link
                 className="link pagination__page-link"
                 to='#'
-                onClick={() => handlePageCLick(currentPage + DEFAULT_PAGE_NUMBER)}
+                onClick={(evt) => handlePageCLick(evt, currentPage + DEFAULT_PAGE_NUMBER)}
               >Далее</Link>
           </li>
         }

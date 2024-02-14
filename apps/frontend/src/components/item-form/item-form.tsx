@@ -12,6 +12,7 @@ import { StringsCountType } from '@guitar-shop/types';
 import { postGuitarFormAction, updateGuitarFormAction } from '../../store/api-actions';
 import ErrorPage from '../../pages/error-page/error-page';
 import { adaptImage } from '../../helpers';
+import { resetFilter } from '../../store/guitar-list/guitar-list.slice';
 
 const DEFAULT_PATH = 'img/content/';
 const DEFAULT_ALT = 'Guitar image';
@@ -66,7 +67,6 @@ export default function ItemForm ({isAddForm}: ItemFormProps):JSX.Element {
           price: Number(price),
           stringsCount
         }))
-        navigate(AppRoute.Products);
       } else {
         dispatch(updateGuitarFormAction({
           id: item.id,
@@ -79,8 +79,9 @@ export default function ItemForm ({isAddForm}: ItemFormProps):JSX.Element {
           price: Number(price),
           stringsCount
         }))
-        navigate(AppRoute.Products);
       }
+      dispatch(resetFilter())
+      navigate(AppRoute.Products);
     }
     return (
       <section className={`${classPrefix}-item`}>

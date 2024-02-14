@@ -23,7 +23,8 @@ export default function CatalogItem ({id, name, createdAt, imageURL, type, price
   const dispatch = useAppDispatch();
   const itemPath = generatePath(AppRoute.ProductId, {productId: id})
   const createdDate = dayjs(createdAt).format('DD.MM.YYYY');
-  const handleDeleteClick = () => {
+  const handleDeleteClick = (evt: React.MouseEvent) => {
+    evt.preventDefault();
     dispatch(removeGuitarFormAction(id));
 
   }
@@ -50,7 +51,7 @@ export default function CatalogItem ({id, name, createdAt, imageURL, type, price
         <button
           className="button button--small button--black-border"
           type="submit"
-          onClick={() => handleDeleteClick()}
+          onClick={(evt) => handleDeleteClick(evt)}
           aria-label="Удалить товар"
         >Удалить</button>
       </div>

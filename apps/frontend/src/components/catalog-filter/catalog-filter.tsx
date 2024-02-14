@@ -14,7 +14,8 @@ export default function CatalogFilter ():JSX.Element {
   const handleStringsCountClick = (num: StringsCountType) => {
     dispatch(updateStringsCountFilter(num))
   }
-  const handleResetFilter = () => {
+  const handleResetFilter = (evt: React.MouseEvent) => {
+    evt.preventDefault();
     dispatch(resetFilter())
   }
   return (
@@ -53,7 +54,7 @@ export default function CatalogFilter ():JSX.Element {
       </fieldset>
       <button
         className="catalog-filter__reset-btn button button--black-border button--medium"
-        onClick={() => handleResetFilter()}
+        onClick={(evt) => handleResetFilter(evt)}
         type="reset"
       >Очистить</button>
     </form>

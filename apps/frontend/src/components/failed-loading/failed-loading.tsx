@@ -7,7 +7,8 @@ export default function FailedLoading(): JSX.Element {
     <>
       <p className="error__text">Не удалось загрузить список гитар. Попробуйте еще раз.</p>
       <button
-        onClick={() => {
+        onClick={(evt: React.MouseEvent) => {
+          evt.preventDefault();
           dispatch(loadGuitarsAction({}));
         }}
         type="button"
