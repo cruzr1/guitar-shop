@@ -10,9 +10,11 @@ export function generateGuitar(mockGuitarData: MockGuitarDataType):Guitar {
   const type = getRandomItem<GuitarCategoryType>(Object.values(GuitarCategory));
   const createdAt = generateRandomDate();
   const article = randomUUID().slice(
-    GuitarValidationParams.Article.Length.Minimum - 1,
-    GuitarValidationParams.Article.Length.Maximum
-    );
+    generateRandomValue(
+      GuitarValidationParams.Article.Length.Minimum,
+      GuitarValidationParams.Article.Length.Maximum
+    )
+  );
   const price = generateRandomValue(
     GuitarValidationParams.Price.MinimumValue,
     GuitarValidationParams.Price.MaximumValue,

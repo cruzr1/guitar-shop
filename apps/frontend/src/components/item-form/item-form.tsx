@@ -6,11 +6,9 @@ import { AppRoute, GuitarNames, STRINGS, EmptyItem } from '../../const';
 import Breadcrumbs from '../breadcrumbs/breadcrumbs'
 import { selectGuitarItem } from '../../store/guitars/guitars.selectors';
 import { GuitarCategoryType } from '../../types';
-import { Fragment, ReactNode, useState } from 'react';
+import { Fragment, useState } from 'react';
 import { StringsCountType } from '@guitar-shop/types';
 import { postGuitarFormAction, updateGuitarFormAction } from '../../store/api-actions';
-import { setGuitarFormError } from '../../store/guitar-form/guitar-form.slice';
-import { selectGuitarFormError } from '../../store/guitar-form/guitar-form.selectors';
 import ErrorPage from '../../pages/error-page/error-page';
 
 type ItemFormProps = {

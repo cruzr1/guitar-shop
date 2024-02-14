@@ -42,7 +42,7 @@ export class GenerateCommand implements Command {
       return;
     } finally {
       this.logger.log(chalk.bgBlueBright.bold(`Total imported ${guitarsCount} records into database. Good luck! 👍`));
-      this.databaseClient.disconnect();
+      await this.databaseClient.disconnect();
     }
   }
 }

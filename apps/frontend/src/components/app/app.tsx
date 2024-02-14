@@ -1,4 +1,4 @@
-import {Route, BrowserRouter, Routes} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import { HelmetProvider } from "react-helmet-async";
 import LoginPage from '../../pages/login-page/login-page';
 import { AppRoute } from '../../const';

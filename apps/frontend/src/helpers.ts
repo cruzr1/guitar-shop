@@ -1,5 +1,5 @@
 import { PASSWORD_REGEX, EMAIL_REGEX, NAME_REGEX, RequestStatus } from './const';
-import { GuitarCategoryType, RequestStatusType } from './types';
+import { RequestStatusType } from './types';
 
 export const isPasswordValid = (pass: string): boolean => PASSWORD_REGEX.test(pass);
 

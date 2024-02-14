@@ -4,7 +4,6 @@ import { AppRoute, GuitarNames } from '../../const';
 import { GuitarCategoryType, StringsCountType } from '../../types';
 import { useAppDispatch } from '../../hooks/hooks';
 import { removeGuitarFormAction } from '../../store/api-actions';
-import { updateGuitarList } from '../../store/guitars/guitars.slice';
 import { setGuitarId } from '../../store/guitar-form/guitar-form.slice';
 
 

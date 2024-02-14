@@ -6,7 +6,7 @@ export const GuitarCategory = {
 
 export const STRINGS = [4, 6, 7, 12] as const;
 
-export const GUITAR_LIST_REUQEST_COUNT = 7;
+export const GUITAR_LIST_REQUEST_COUNT = 7;
 
 export const DEFAULT_PAGE_NUMBER = 1;
 

@@ -1,4 +1,4 @@
-import { GUITAR_CATEGORIES, GuitarCategory, NameSpace, STRINGS, SortOrder, SortOrderField } from '../../const';
+import { GUITAR_CATEGORIES, NameSpace, STRINGS, SortOrder, SortOrderField } from '../../const';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { GuitarCategoryType, SortOrderFieldType, SortOrderType, StringsCountType } from '../../types';
 

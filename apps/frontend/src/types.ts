@@ -1,5 +1,5 @@
 import { store } from "./store/store";
-import { AppRoute, GuitarCategory, RequestStatus } from './const';
+import { AppRoute, RequestStatus } from './const';
 
 export type StringsCountType = 4 | 6 | 7 | 12;
 

@@ -18,7 +18,7 @@ export class CreateNewGuitarDto {
 
   @ApiProperty({
     required: true,
-    description: 'The guitar descrtiption',
+    description: 'The guitar description',
     example: 'The brand new guitar on a market'
   })
   @IsNotEmpty()

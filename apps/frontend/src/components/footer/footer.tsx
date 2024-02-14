@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AppRoute, Networks } from '../../const'
 
 const FOOTER_LINKS = [ 'Где купить,', 'Блог', 'Вопрос-ответ', 'Возврат', 'Сервис-центры'];

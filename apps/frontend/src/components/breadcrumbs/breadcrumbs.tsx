@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { AppRoute } from '../../const'
 
 type BreadcrumbsProps = {

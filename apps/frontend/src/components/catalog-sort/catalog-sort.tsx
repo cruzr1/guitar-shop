@@ -3,7 +3,6 @@ import { updateSortField, updateSortOrder } from '../../store/guitar-list/guitar
 import classNames from 'classnames';
 import { selectActiveSortField, selectActiveSortOrder } from '../../store/guitar-list/guitar-list.selectors';
 import { SortOrder, SortOrderField } from '../../const';
-import { updateCurrentPageNumber } from '../../store/guitars/guitars.slice';
 
 export default function CatalogSort ():JSX.Element {
   const dispatch = useAppDispatch();

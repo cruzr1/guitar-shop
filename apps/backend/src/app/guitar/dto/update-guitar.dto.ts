@@ -19,7 +19,7 @@ export class UpdateGuitarDto {
   public name: string;
 
   @ApiProperty({
-    description: 'The guitar descrtiption',
+    description: 'The guitar description',
     example: 'The brand new guitar on a market'
   })
   @IsOptional()

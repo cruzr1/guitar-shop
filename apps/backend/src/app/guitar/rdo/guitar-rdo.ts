@@ -19,7 +19,7 @@ export class GuitarRdo {
 
   @Expose()
   @ApiProperty({
-    description: 'The guitar descrtiption',
+    description: 'The guitar description',
     example: 'The brand new guitar on a market'
   })
   public description: string;

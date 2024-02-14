@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
-import { DEFAULT_PAGE_NUMBER, PaginationParams } from '../../const';
+import { DEFAULT_PAGE_NUMBER } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { selectCurrentPageNumber, selectTotalPagesNumber } from '../../store/guitars/guitars.selectors';
 import { updateCurrentPageNumber } from '../../store/guitars/guitars.slice';
@@ -14,7 +14,7 @@ export default function Pagination ():JSX.Element {
   const lastPage = Math.min(currentPage + DEFAULT_PAGE_NUMBER, totalPages)
   const isNextDisplay = totalPages > currentPage;
   const isBackDisplay = currentPage > DEFAULT_PAGE_NUMBER;
-  const hanlePageCLick = (val: number) => {
+  const handlePageCLick = (val: number) => {
     const newPage = val >= DEFAULT_PAGE_NUMBER && val <= totalPages ? val : currentPage;
     dispatch(updateCurrentPageNumber(newPage));
   }
@@ -30,7 +30,7 @@ export default function Pagination ():JSX.Element {
             <Link
                 className="link pagination__page-link"
                 to='#'
-                onClick={() => hanlePageCLick(currentPage - DEFAULT_PAGE_NUMBER)}
+                onClick={() => handlePageCLick(currentPage - DEFAULT_PAGE_NUMBER)}
               >Назад</Link>
           </li>
         }

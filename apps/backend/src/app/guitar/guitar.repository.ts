@@ -1,7 +1,7 @@
 import { FilterQuery, Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { Injectable } from '@nestjs/common';
-import { BaseMongoRepository, Guitar, PaginationResult, IndexGuitarsQuery, GUITAR_LIST_REUQEST_COUNT, DEFAULT_PAGE_NUMBER } from '@guitar-shop/types';
+import { BaseMongoRepository, Guitar, PaginationResult, IndexGuitarsQuery, GUITAR_LIST_REQUEST_COUNT, DEFAULT_PAGE_NUMBER } from '@guitar-shop/types';
 import { GuitarModel } from './guitar.model';
 import { GuitarEntity } from './guitar.entity';
 
@@ -21,21 +21,20 @@ export class GuitarRepository extends BaseMongoRepository<GuitarEntity, Guitar> 
     if (stringsCount) {
       query.stringsCount = { $in: stringsCount };
     }
-    const skip = (page - DEFAULT_PAGE_NUMBER) * GUITAR_LIST_REUQEST_COUNT;
+    const skip = (page - DEFAULT_PAGE_NUMBER) * GUITAR_LIST_REQUEST_COUNT;
     const orderBy = {[sortByField]: sortByOrder};
-    const limit = GUITAR_LIST_REUQEST_COUNT
     const [guitarsList, totalGuitars] = await Promise.all([
       this.model.find(query)
         .sort(orderBy)
         .skip(skip)
-        .limit(limit)
+        .limit(GUITAR_LIST_REQUEST_COUNT)
         .exec(),
       this.model.countDocuments(query).exec()
     ]);
     return {
       entities: guitarsList.map((guitar) => this.createEntityFromDocument(guitar)),
       currentPage: page,
-      totalPages: Math.ceil(totalGuitars / GUITAR_LIST_REUQEST_COUNT),
+      totalPages: Math.ceil(totalGuitars / GUITAR_LIST_REQUEST_COUNT),
     }
   }
 }

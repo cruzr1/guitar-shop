@@ -1,4 +1,4 @@
-import axios, {AxiosInstance, AxiosError, InternalAxiosRequestConfig, HttpStatusCode} from 'axios';
+import axios, { AxiosInstance, AxiosError, InternalAxiosRequestConfig } from 'axios';
 import { getToken } from './token';
 import { BASE_URL, REQUEST_TIMEOUT, } from '../const';
 
