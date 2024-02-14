@@ -1,20 +1,20 @@
-import { generatePath, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ChangeEvent, useRef } from 'react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { AppRoute, GuitarNames, STRINGS, EmptyItem } from '../../const';
 import Breadcrumbs from '../breadcrumbs/breadcrumbs'
-import { selectGuitarItem, selectGuitars } from '../../store/guitars/guitars.selectors';
+import { selectGuitarItem } from '../../store/guitars/guitars.selectors';
 import { GuitarCategoryType } from '../../types';
 import { Fragment, useState } from 'react';
 import { StringsCountType } from '@guitar-shop/types';
 import { postGuitarFormAction, updateGuitarFormAction } from '../../store/api-actions';
 import ErrorPage from '../../pages/error-page/error-page';
 import { adaptImage } from '../../helpers';
-import { selectGuitarId } from '../../store/guitar-form/guitar-form.selectors';
 
 const DEFAULT_PATH = 'img/content/';
+const DEFAULT_ALT = 'Guitar image';
 
 type ItemFormProps = {
   isAddForm?: boolean,
@@ -27,7 +27,7 @@ export default function ItemForm ({isAddForm}: ItemFormProps):JSX.Element {
   if (item) {
     const [type, setType] = useState<GuitarCategoryType>(item.type);
     const [imageURL, setImageURL] = useState<string>(item.imageURL);
-    const [alt, setAlt] = useState<string>(item.name);
+    const [alt, setAlt] = useState<string>(isAddForm ? DEFAULT_ALT: item.name);
     const [stringsCount, setStringsCount] = useState<StringsCountType>(item.stringsCount);
     const [name, setName] = useState<string>(item.name);
     const [createdAt, setCreatedAt] = useState<Date | null>(new Date(item.createdAt));
