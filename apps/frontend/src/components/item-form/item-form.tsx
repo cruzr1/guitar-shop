@@ -1,15 +1,20 @@
-import { useNavigate } from 'react-router-dom';
+import { generatePath, useNavigate } from 'react-router-dom';
+import { ChangeEvent, useRef } from 'react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { AppRoute, GuitarNames, STRINGS, EmptyItem } from '../../const';
 import Breadcrumbs from '../breadcrumbs/breadcrumbs'
-import { selectGuitarItem } from '../../store/guitars/guitars.selectors';
+import { selectGuitarItem, selectGuitars } from '../../store/guitars/guitars.selectors';
 import { GuitarCategoryType } from '../../types';
 import { Fragment, useState } from 'react';
 import { StringsCountType } from '@guitar-shop/types';
 import { postGuitarFormAction, updateGuitarFormAction } from '../../store/api-actions';
 import ErrorPage from '../../pages/error-page/error-page';
+import { adaptImage } from '../../helpers';
+import { selectGuitarId } from '../../store/guitar-form/guitar-form.selectors';
+
+const DEFAULT_PATH = 'img/content/';
 
 type ItemFormProps = {
   isAddForm?: boolean,
@@ -21,6 +26,8 @@ export default function ItemForm ({isAddForm}: ItemFormProps):JSX.Element {
   const item = isAddForm ? EmptyItem : useAppSelector(selectGuitarItem);
   if (item) {
     const [type, setType] = useState<GuitarCategoryType>(item.type);
+    const [imageURL, setImageURL] = useState<string>(item.imageURL);
+    const [alt, setAlt] = useState<string>(item.name);
     const [stringsCount, setStringsCount] = useState<StringsCountType>(item.stringsCount);
     const [name, setName] = useState<string>(item.name);
     const [createdAt, setCreatedAt] = useState<Date | null>(new Date(item.createdAt));
@@ -29,13 +36,31 @@ export default function ItemForm ({isAddForm}: ItemFormProps):JSX.Element {
     const [description, setDescription] = useState<string>(item.description);
     const RequiredFieldComment = ():JSX.Element => <p>Заполните поле</p>;
     const navigate = useNavigate();
+    const inputRef = useRef<HTMLInputElement>(null)
+    const handleImageAddButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      evt.preventDefault();
+      inputRef.current?.click()
+    }
+    const handleImageDeleteButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      evt.preventDefault();
+      setImageURL('');
+      setAlt('Guitar image')
+    }
+    const handleFileChange = (evt: ChangeEvent<HTMLInputElement>) => {
+      const newImage = evt.target.files && evt.target.files[0];
+      if (!newImage) {
+        return;
+      }
+      setImageURL(`${DEFAULT_PATH}${newImage.name}`);
+      setAlt(item.name)
+    }
     const handleFormSubmit = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       evt.preventDefault();
       if (isAddForm) {
         dispatch(postGuitarFormAction({
           name,
           description,
-          imageURL: item.imageURL,
+          imageURL,
           type,
           article,
           price: Number(price),
@@ -48,7 +73,7 @@ export default function ItemForm ({isAddForm}: ItemFormProps):JSX.Element {
           createdAt: createdAt as Date,
           name,
           description,
-          imageURL: item.imageURL,
+          imageURL,
           type,
           article,
           price: Number(price),
@@ -66,14 +91,24 @@ export default function ItemForm ({isAddForm}: ItemFormProps):JSX.Element {
             <div className={`${classPrefix}-item__form-left`}>
               <div className={`edit-item-image ${classPrefix}-item__form-image`}>
                 <div className="edit-item-image__image-wrap">
-                  {!isAddForm && <img className="edit-item-image__image" src="img/content/add-item-1.png" srcSet="img/content/add-item-1@2x.png 2x" width="133" height="332" alt={name}/>}
+                  <img className="edit-item-image__image" src={imageURL} srcSet={adaptImage(imageURL)} width="133" height="332" alt={alt}/>
                 </div>
                 <div className="edit-item-image__btn-wrap">
+                <input
+                  style={{display: 'none'}}
+                  ref={inputRef}
+                  type="file"
+                  onChange={(evt) => handleFileChange(evt)}
+                />
                   <button
                     className="button button--small button--black-border edit-item-image__btn"
+                    onClick={(evt) => handleImageAddButtonClick(evt)}
                   >Добавить
                   </button>
-                  <button className="button button--small button--black-border edit-item-image__btn">Удалить</button>
+                  <button
+                    className="button button--small button--black-border edit-item-image__btn"
+                    onClick={(evt) => handleImageDeleteButtonClick(evt)}
+                  >Удалить</button>
                 </div>
               </div>
               <div className={`input-radio ${classPrefix}-item__form-radio`}><span>{isAddForm ? 'Выберите тип товара' : 'Тип товара'}</span>

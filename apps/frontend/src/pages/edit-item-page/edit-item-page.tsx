@@ -7,7 +7,7 @@ export default function EditItemPage ():JSX.Element {
       <Helmet>
         <title>Редактирование товара — Guitar-shop</title>
       </Helmet>
-      <ItemForm />
+      <ItemForm isAddForm={false} />
     </>
   )
 }

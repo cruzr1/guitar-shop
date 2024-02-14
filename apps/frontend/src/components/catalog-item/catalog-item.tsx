@@ -30,9 +30,6 @@ export default function CatalogItem ({id, name, createdAt, imageURL, type, price
   const handleEditHover = () => {
     dispatch(setGuitarId(id));
   }
-  const handleEditLeave = () => {
-    dispatch(setGuitarId(''));
-  }
   return (
     <>
       <div className="catalog-item__data"><img src={imageURL} width="36" height="93" alt="Картинка гитары"/>
@@ -48,7 +45,6 @@ export default function CatalogItem ({id, name, createdAt, imageURL, type, price
           className="button button--small button--black-border"
           to={AppRoute.EditItem}
           onMouseEnter={() => handleEditHover()}
-          onMouseLeave={() => handleEditLeave()}
           aria-label="Редактировать товар"
         >Редактировать</Link>
         <button
