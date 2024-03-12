@@ -68,7 +68,7 @@ npm run build:frontend
 
 **lint** - запустить линтер
 ```
-npm run build:frontend
+npm run lint
 ```
 
 **cli** - запустить CLI приложение для заполнения базы данных начальными данными
@@ -82,3 +82,6 @@ npm run build:frontend
 ```
 npm run cli
 ```
+
+Количество затраченных часов:
+57:37:07

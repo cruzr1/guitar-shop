@@ -6,7 +6,7 @@
     "backend": "nx run backend:serve:production",
     "frontend": "nx run frontend:serve:production",
     "build:backend": "nx run backend:build",
-    "build:frontend": "nx run forntend:build",
+    "build:frontend": "nx run frontend:build",
     "lint": "eslint --ext ts,tsx",
     "cli": "ts-node apps/backend/src/main.cli.ts"
   },
